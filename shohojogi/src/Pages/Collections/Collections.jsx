@@ -1,29 +1,38 @@
+import { useState } from 'react'
 import './Collections.css'
+import ServiceList from '../../components/ServiceList/ServiceList.jsx'
+import { servicesByCategory } from '../../data/dummyServices.js'
 
-const CATEGORIES = [
-  { name: 'Home Services', blurb: 'Electricians, plumbers, cleaners and repair help.' },
-  { name: 'Errands & Bill Pay', blurb: 'Bank queues, utility bills, ticket counters, pickups.' },
-  { name: 'Elder & Child Care', blurb: 'In-home companionship, babysitting, daily check-ins.' },
-  { name: 'Drivers & Movers', blurb: 'Personal drivers, house shifting, heavy lifting.' },
-  { name: 'Tutors', blurb: 'Subject tutors, exam prep, language coaching.' },
-  { name: 'Security Guards', blurb: 'Event security, night watch, gate duty.' },
-  { name: 'Event Specialists', blurb: 'Mehendi artists, decorators, photographers.' },
-  { name: 'Delivery & Food Runs', blurb: 'Parcel pickup, hospital meal delivery, shopping runs.' },
-  { name: 'Tour Guides', blurb: 'Local guides for visitors and out-of-town family.' },
-]
+const CATEGORIES = Object.keys(servicesByCategory)
 
 function Collections() {
+  const [active, setActive] = useState(CATEGORIES[0])
+
   return (
     <section id="collections">
-      <h1>Find someone for the task</h1>
+      <div className="hero-banner">
+        <div className="hero-shape shape-1" aria-hidden="true"></div>
+        <div className="hero-shape shape-2" aria-hidden="true"></div>
+        <div className="hero-content">
+          <h1>Find someone for the task</h1>
+          <p>Trusted help for life’s everyday tasks and more.</p>
+        </div>
+      </div>
+
       <div className="collections-grid">
-        {CATEGORIES.map((c) => (
-          <div className="cat-card" key={c.name}>
-            <h2>{c.name}</h2>
-            <p>{c.blurb}</p>
-          </div>
+        {CATEGORIES.map((name) => (
+          <button
+            key={name}
+            type="button"
+            className={`cat-card${name === active ? ' active' : ''}`}
+            onClick={() => setActive(name)}
+          >
+            <h2>{name}</h2>
+          </button>
         ))}
       </div>
+
+      <ServiceList key={active} title={active} services={servicesByCategory[active]} />
     </section>
   )
 }
