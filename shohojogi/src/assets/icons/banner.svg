@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" width="100%" height="100%">
+  <defs>
+    <style>
+      .text-dark {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-weight: 700;
+        font-size: 195px;
+        fill: #3b3e40;
+        letter-spacing: -2px;
+      }
+      .text-green {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-weight: 700;
+        font-size: 195px;
+        fill: #007a3d;
+        letter-spacing: -2px;
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="178">
+    <tspan class="text-dark">Shoho</tspan>
+    <tspan class="text-green">jogi</tspan>
+  </text>
+</svg>
