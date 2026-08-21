@@ -44,7 +44,7 @@ function Navbar(){
            ))}
         </ul>
     
-      <InteractiveHoverButton className={"border-2 border-green-500"} onClick={() => navigate("/")}>Join Now</InteractiveHoverButton>
+      <InteractiveHoverButton className={"border-2 border-green-500"} onClick={() => navigate("/join")}>Join Now</InteractiveHoverButton>
         </div>
 
         <button onClick={() => setMenuOpen(!menuOpen)} className='md:hidden p-2 rounded-lg hover:bg-gray-200 transition'>
@@ -57,12 +57,12 @@ function Navbar(){
           <ul className="flex flex-col gap-4">
            {navLinks.map((link, index) => (
             <li key={index} className="cursor-pointer font-quicksand font-light hover:text-green-700 p-0.5 group relative" onClick={() => setMenuOpen(false)}>
-                {link}
+                <NavLink to={link.link}>{link.name}</NavLink>
             </li>
            ))}
         </ul>
 
-        <InteractiveHoverButton className={"border-2 border-green-800"}>Join Now</InteractiveHoverButton>
+        <InteractiveHoverButton className={"border-2 border-green-800"} onClick={() => { navigate("/join"); setMenuOpen(false); }}>Join Now</InteractiveHoverButton>
 
         </div>)}
     </nav>
