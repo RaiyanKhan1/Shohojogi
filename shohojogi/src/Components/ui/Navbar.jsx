@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { InteractiveHoverButton } from './interactive-hover-button';
 import { LeafyGreen } from 'lucide-react';
 import { Menu, X } from 'lucide-react'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Navbar(){
 
@@ -10,6 +11,7 @@ function Navbar(){
                       { name: "Hire People", link: "/collections" },
                       { name: "Why Shohojogi", link: "" },
                       { name: "Contact", link: "" },];
+    const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     
   
@@ -26,7 +28,7 @@ function Navbar(){
            {navLinks.map((item, index) => (
             <li key={index} className="cursor-pointer font-quicksand font-light hover:text-green-700 p-0.5 group relative">
             
-            <Link to={item.link}>
+            <NavLink to={item.link} className={({isActive}) => `px-3 py-2 rounded-full transition-all duration-300 ${isActive ? "bg-green-700 border-2 border-green-500 text-white" : "text-gray-700 hover:text-green-700"}`}>
             {item.name}
  
                 <span className="
@@ -37,12 +39,12 @@ function Navbar(){
                 ">
 
                 </span>
-            </Link>
+            </NavLink>
             </li>
            ))}
         </ul>
     
-      <InteractiveHoverButton className={"border-2 border-green-800"}>Join Now</InteractiveHoverButton>
+      <InteractiveHoverButton className={"border-2 border-green-500"} onClick={() => navigate("/")}>Join Now</InteractiveHoverButton>
         </div>
 
         <button onClick={() => setMenuOpen(!menuOpen)} className='md:hidden p-2 rounded-lg hover:bg-gray-200 transition'>
