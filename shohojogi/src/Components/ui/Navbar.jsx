@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { InteractiveHoverButton } from './interactive-hover-button';
 import { LeafyGreen } from 'lucide-react';
 import { Menu, X } from 'lucide-react'
+import { Link } from "react-router-dom";
 
 function Navbar(){
 
-    const navLinks = ["Find Work", "Hire People", "Why Shohojogi", "Contact",];
+    const navLinks = [{ name: "Find Work", link: "/collections" },
+                      { name: "Hire People", link: "" },
+                      { name: "Why Shohojogi", link: "" },
+                      { name: "Contact", link: "" },];
     const [menuOpen, setMenuOpen] = useState(false);
     
   
@@ -19,9 +23,11 @@ function Navbar(){
         </div>
         <div className="hidden md:flex ml-auto items-center gap-3">
         <ul className="flex gap-4 lg:gap-5">
-           {navLinks.map((link, index) => (
+           {navLinks.map((item, index) => (
             <li key={index} className="cursor-pointer font-quicksand font-light hover:text-green-700 p-0.5 group relative">
-                {link}
+            
+            <Link to={item.link}>
+            {item.name}
  
                 <span className="
                 absolute left-1/2 -bottom-1 h-1 w-full -translate-x-1/2
@@ -31,6 +37,7 @@ function Navbar(){
                 ">
 
                 </span>
+            </Link>
             </li>
            ))}
         </ul>

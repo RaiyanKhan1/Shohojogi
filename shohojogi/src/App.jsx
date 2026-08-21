@@ -15,6 +15,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/collections" element={<Collections />} />
         
       </Routes>
     </BrowserRouter>
