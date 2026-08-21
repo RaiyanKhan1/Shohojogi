@@ -21,14 +21,14 @@ function Navbar(){
     <nav className="fixed top-0 left-0 z-50  w-full max-h-1/9 bg-white">
       <div className="flex justify-between items-center w-full px-4 sm:px-6 lg:px-10">
         <div> 
-        <img className="flex h-7 sm:h-8 w-auto m-4" src="src/assets/icons/banner.svg"></img>
+        <img className="flex h-7 sm:h-8 w-auto m-4 cursor-pointer" src="src/assets/icons/banner.svg" onClick={() => navigate("/")}></img>
         </div>
-        <div className="hidden md:flex ml-auto items-center gap-3">
+          <div className="hidden md:flex ml-auto items-center gap-3">
         <ul className="flex gap-4 lg:gap-5">
            {navLinks.map((item, index) => (
             <li key={index} className="cursor-pointer font-quicksand font-light hover:text-green-700 p-0.5 group relative">
             
-            <NavLink to={item.link} className={({isActive}) => `px-3 py-2 rounded-full transition-all duration-300 ${isActive ? "bg-green-700 border-2 border-green-500 text-white" : "text-gray-700 hover:text-green-700"}`}>
+              <NavLink to={item.link} className={({isActive}) => `p-2 border-2 rounded-full transition-all  ${isActive ? "bg-green-700 border-green-500 text-white shadow-[0px_1px_0.9px_rgb(211,211,211)]" : "text-gray-700 border-white hover:text-green-700"}`}>
             {item.name}
  
                 <span className="
