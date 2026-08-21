@@ -3,6 +3,7 @@ import './ProductPage.css';
 
 
 import ProfileHero from '../../Components/Product/ProfileHero.jsx';
+import StatsStrip from '../../Components/Product/StatsStrip.jsx';
 
 
 import defaultProfileData from '../../Data/profileData.js';
@@ -15,6 +16,7 @@ export default function ProductPage({ data = defaultProfileData }) {
       
 
       <ProfileHero identity={identity} credibility={credibility} />
+      <StatsStrip credibility={credibility} />
       
     </div>
   );

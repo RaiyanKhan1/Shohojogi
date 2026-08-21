@@ -169,11 +169,12 @@
 .fp-hero-inner { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
 
 .fp-avatar {
-  width: 88px; height: 88px;
+  width: 100px; height: 100px;
   border-radius: 20px;
   object-fit: cover;
   border: 1px solid var(--fp-border);
   flex-shrink: 0;
+  margin-top: 10px;
 }
 
 .fp-status-dot {
@@ -227,3 +228,45 @@
   font-weight: 600;
 }
 
+/* ==========================================================================
+   Stats strip
+   ========================================================================== */
+.fp-stats {
+  display: flex;
+  border: 1px solid var(--fp-border);
+  border-radius: var(--fp-radius-md);
+  background: var(--fp-bg);
+  overflow: hidden;
+  margin-top: 28px;
+}
+.fp-stat {
+  flex: 1;
+  padding: 12px 20px;
+  border-right: 1px solid var(--fp-border);
+  
+}
+.fp-stat:last-child { border-right: none; }
+.fp-stat-value {
+  font-family: var(--fp-font-mono);
+  font-size: 32px;
+  color: var(--fp-text);
+  align-items: center;
+  gap: 1px;
+}
+.fp-stat-value small { font-size: 13px; color: var(--fp-text-faint); }
+.fp-stat-label {
+  font-size: 12px;
+  color: var(--fp-text-muted);
+  margin-top: 4px;
+}
+@media (max-width: 640px) {
+  .fp-stats { 
+    flex-wrap: wrap; 
+  }
+  .fp-stat { 
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 50%;
+    border-bottom: 1px solid var(--fp-border); 
+  }
+}
