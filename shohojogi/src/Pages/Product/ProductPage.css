@@ -270,3 +270,134 @@
     border-bottom: 1px solid var(--fp-border); 
   }
 }
+/* ==========================================================================
+   About
+   ========================================================================== */
+.fp-about-bio { 
+  display: flex; 
+  flex-direction: column;
+  
+  }
+.fp-about-bio p {
+   color: var(--fp-text-muted); 
+   font-size: 15px; 
+   max-width: 68ch; 
+  }
+.fp-specialty-tags {
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 8px;
+  margin-top: 20px;
+  
+}
+.fp-tag{
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+/* ==========================================================================
+   Trust Badge
+   ========================================================================== */
+
+.fp-trust-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 10px auto 0;
+  padding: 20px 24px;
+
+  border: 1px dashed;
+  border-radius: 15px;
+}
+
+.fp-trust-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.fp-trust-text {
+  color: #686868;
+  font-size: 20px;
+  padding: 2px 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.fp-trust-tags {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+}
+
+.fp-tag {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f3f3f3;
+  font-size: 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.fp-trust-progrssbar
+{
+  width: 100%;
+  
+}
+.fp-div-trust-progrssbar {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .fp-trust-container {
+    flex-direction: column;
+    gap: 14px;
+    padding: 6px 12px;
+    margin-top: 10px;
+  }
+
+  .fp-trust-row {
+    flex-direction: column;
+    gap: 14px;
+    white-space: normal;
+    overflow-x: visible;
+  }
+
+  .fp-trust-text {
+    font-size: 18px;
+    align-self: center;
+    white-space: normal;
+  }
+
+  .fp-trust-tags {
+    width: 100%;
+    flex: none;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+}
+
+.fp-trust-progrssbar [data-slot="progress-track"] {
+  height: 7px;         /* was h-1 = 4px */
+  border-radius: 999px;
+}
+
+/* change fill color */
+.fp-trust-progrssbar [data-slot="progress-indicator"] {
+  background-color: #080808;   /* your desired color */
+  border-radius: 999px;
+}
+
+.fp-div-trust-progrssbar {
+  padding: 20px;
+}

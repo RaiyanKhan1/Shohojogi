@@ -29,17 +29,14 @@ const profileData = {
   },
 
   about: {
-    bio: [
-      "I turn product briefs into scroll-stopping video — cinematic ads, UGC-style content, and AI-generated spots built with Seedance and Higgsfield, then cut and graded until they feel shot on set.",
-      "Most of my work ships for paid social, so everything is built to survive the first three seconds: hook-first edits, caption-safe framing, and sound design that works muted.",
-    ],
-    specialties: [
-      'AI Video Generation',
-      'UGC Ad Scripts',
-      'Cinematic Motion',
-      'Product Demos',
-      'Social Cutdowns',
-      'Voiceover Sync',
+    bio: "I'm on currently mentoring many students, teaching them from the basics",
+      
+    
+    safetytags: [
+      'NID Varified',
+      'Police Varification',
+      'Education Varified',
+      'Location Varified',
     ],
   },
 
