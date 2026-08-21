@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 function Navbar(){
 
-    const navLinks = [{ name: "Find Work", link: "/collections" },
-                      { name: "Hire People", link: "" },
+    const navLinks = [{ name: "Find Work", link: "" },
+                      { name: "Hire People", link: "/collections" },
                       { name: "Why Shohojogi", link: "" },
                       { name: "Contact", link: "" },];
     const [menuOpen, setMenuOpen] = useState(false);
