@@ -22,7 +22,7 @@ function Homepage(){
         
         <Services />
         <div className='m-5'> </div>
-        <div className="flex flex-col justify-center items-center gap-10 h-100 w-auto rounded-2xl bg-gradient-to-br from-green-950 via-green-800 to-green-700 border-2 border-green-500 border-b-3 shadow-[0px_1px_0px_rgba(0,0,0,0.2)]">
+        <div className="flex flex-col justify-center items-center gap-10 h-100 w-auto rounded-2xl bg-linear-to-br from-green-950 via-green-800 to-green-700 border-2 border-green-500 border-b-3 shadow-[0px_1px_0px_rgba(0,0,0,0.2)]">
           <p className="text-6xl text-white font-quicksand">Want to avail services instantly?</p>
       <NoiseBackground
         containerClassName="w-fit p-2 rounded-full mx-auto"
@@ -42,7 +42,7 @@ function Homepage(){
        
         </div>
 
-        <div className='flex h-100 w-95% m-2 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-800 via-gray-900 to-gray-950'>
+        <div className='flex h-100 w-95% m-2 items-center justify-center rounded-2xl bg-linear-to-br from-slate-800 via-gray-900 to-gray-950'>
             <p className='text-4xl font-quicksand text-white font-bold'>&copy; Shohojogi</p>
 
         </div>
