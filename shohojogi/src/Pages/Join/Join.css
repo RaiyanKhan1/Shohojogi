@@ -7,15 +7,15 @@
 }
 
 .join-shell { max-width: 800px; margin: 0 auto; text-align: center; }
-.join-shell h1, .auth-card h1 { margin: 0; font-size: clamp(2.5rem, 5vw, 4.3rem); font-weight: 700; }
-.join-subtitle { margin: 30px 0 62px; color: #536158; font-size: 1.45rem; }
+.join-shell h1, .auth-card h1 { margin: 0; font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 700; }
+.join-subtitle { margin: 30px 0 62px; color: #536158; font-size: 1.05rem; }
 .role-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
 .role-card { padding: 24px; border: 1px solid #dce4df; border-radius: 14px; background: #fff; cursor: pointer; font: inherit; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
 .role-card:hover, .role-card:focus-visible { transform: translateY(-5px); border-color: #16803c; box-shadow: 0 16px 38px rgba(18, 94, 49, .12); outline: none; }
 .role-visual { display: grid; min-height: 245px; place-items: center; border-radius: 12px; background: linear-gradient(135deg, #e9ffc4, #bff3d0); }
-.role-title { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 24px; font-size: 1.8rem; font-weight: 600; }
-.role-description { display: block; margin-top: 8px; color: #929b95; font-size: 1.1rem; }
-.account-switch { margin-top: 58px; font-size: 1.05rem; }
+.role-title { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 18px; font-size: 1.15rem; font-weight: 600; }
+.role-description { display: block; margin-top: 8px; color: #929b95; font-size: .85rem; }
+.account-switch { margin-top: 58px; font-size: .9rem; }
 .account-switch button { padding: 0; border: 0; color: #087b2c; background: none; cursor: pointer; font: inherit; text-decoration: underline; }
 
 .auth-card { width: min(100%, 500px); margin: 28px auto 0; padding: 40px; border: 1px solid #dce4df; border-radius: 18px; background: #fff; box-shadow: 0 18px 48px rgba(18, 94, 49, .1); }
@@ -32,11 +32,11 @@
   .join-page { padding: 92px 18px 40px; }
   .join-subtitle { margin: 20px 0 34px; }
   .role-grid { grid-template-columns: 1fr; gap: 20px; }
-  .role-visual { min-height: 180px; }
+  .role-visual { min-height: 160px; }
   .account-switch { margin-top: 36px; }
   .auth-card { padding: 28px 22px; }
 }
-/* Fix login and signup font sizes */
+
 .auth-card h1 {
   margin: 28px 0 8px;
   font-size: 38px;
