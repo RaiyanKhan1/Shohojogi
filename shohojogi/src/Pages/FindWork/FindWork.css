@@ -1,0 +1,101 @@
+#find-work {
+  --text: #5b6660;
+  --text-h: #0a1f14;
+  --bg: #fff;
+  --border: oklch(0.922 0 0);
+  --code-bg: #eef4f0;
+  --accent: #0f3d24;
+  --accent-bg: rgba(15, 61, 36, 0.08);
+  --accent-border: rgba(15, 61, 36, 0.45);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 1024px) {
+  #find-work {
+    font-size: 16px;
+  }
+}
+
+[id="find-work"] h1,
+[id="find-work"] h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+#find-work {
+  padding: 0 32px 0;
+  max-width: 1200px;
+  margin: 80px auto 0;
+  text-align: left;
+}
+
+.find-work-hero {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: #004518;
+  overflow: hidden;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.find-work-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.find-work-shape.shape-1 {
+  width: 220px;
+  height: 220px;
+  right: -60px;
+  top: -80px;
+}
+
+.find-work-shape.shape-2 {
+  width: 140px;
+  height: 140px;
+  left: -40px;
+  bottom: -70px;
+}
+
+.find-work-hero-content {
+  position: relative;
+}
+
+.find-work-hero-content h1 {
+  color: #ffffff;
+  font-size: 40px;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .find-work-hero-content h1 {
+    font-size: 28px;
+  }
+}
+
+.find-work-sample {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-h);
+  margin: 32px 0 8px;
+}
