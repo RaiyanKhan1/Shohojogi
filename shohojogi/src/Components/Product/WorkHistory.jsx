@@ -15,9 +15,11 @@ export default function WorkHistoryTimeline({ history }) {
             <div className="fp-timeline-header">
               <div>
                 <div className="fp-timeline-role">{job.role}</div>
-                <div className="fp-timeline-client">{job.client}</div>
+                <div className="fp-timeline-client">{job.client} : {job.rating}</div>
+                <div className="fp-timeline-feedback">{job.feedback}</div>
               </div>
               <span className="fp-timeline-time">{job.timeframe}</span>
+              
             </div>
             
             <span className="fp-timeline-budget">{job.budget}</span>

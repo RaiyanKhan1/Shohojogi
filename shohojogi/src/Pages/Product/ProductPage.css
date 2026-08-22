@@ -473,10 +473,10 @@
   padding: 0 0 28px 28px;
   border-left: 1px solid var(--fp-border);
 }
-.fp-timeline-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+
 .fp-timeline-dot {
   position: absolute;
-  left: -5px; top: 2px;
+  left: -5px; top: 8px;
   width: 9px; height: 9px;
   border-radius: 50%;
   background: var(--fp-bg);
@@ -487,7 +487,12 @@
   gap: 12px; flex-wrap: wrap;
 }
 .fp-timeline-role { font-weight: 600; font-size: 15px; }
-.fp-timeline-client { color: var(--fp-text-muted); font-size: 13.5px; margin-top: 2px; }
+.fp-timeline-feedback { color: var(--fp-text-muted); font-size: 13.5px; margin-top: 2px; }
+.fp-timeline-client{
+  margin-top: 5px;
+   font-weight: 600; font-size: 12px;
+   color: var(--fp-surface);
+}
 .fp-timeline-time {
   font-family: var(--fp-font-mono);
   font-size: 12px;

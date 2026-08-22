@@ -62,7 +62,8 @@ const profileData = {
       client: 'Raiyan',
       role: 'Grocery shopping',
       timeframe: 'Jul 2026',
-     
+      rating: '5 star',
+      feedback: 'loved his work',
       budget: '500tk',
     },
     {
@@ -70,7 +71,8 @@ const profileData = {
       client: 'Sumaiya Joya',
       role: 'Delivering a percel',
       timeframe: 'Apr 2026',
-      
+      rating: '5 star',
+      feedback: 'loved his work',
       budget: '1000tk',
     },
     {
@@ -78,7 +80,8 @@ const profileData = {
       client: 'Delivering a letter',
       role: 'Ahanf',
       timeframe: 'Feb 2026',
-     
+      rating: '5 star',
+      feedback: 'loved his work',
       budget: '900tk',
     },
   ],
