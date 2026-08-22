@@ -9,8 +9,7 @@ function Navbar(){
 
     const navLinks = [{ name: "Find Work", link: "/find-work" },
                       { name: "Hire People", link: "/collections" },
-                      { name: "Why Shohojogi", link: "/why-shohojogi" },
-                      { name: "Contact", link: "" },];
+                      { name: "Why Shohojogi", link: "/why-shohojogi" },];
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     
