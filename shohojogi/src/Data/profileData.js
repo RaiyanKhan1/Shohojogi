@@ -41,12 +41,10 @@ const profileData = {
   },
 
   skills: [
-    { name: 'Seedance', level: 'Expert' },
-    { name: 'Higgsfield', level: 'Expert' },
-    { name: 'CapCut', level: 'Advanced' },
-    { name: 'Adobe Premiere Pro', level: 'Advanced' },
-    { name: 'Runway', level: 'Intermediate' },
-    { name: 'ElevenLabs (voice)', level: 'Advanced' },
+    { name: 'Communiaction', level: 'Expert' },
+    { name: 'English Speaking', level: 'Expert' },
+    { name: 'Time management', level: 'Intermediate' },
+   
   ],
 
   portfolio: [
