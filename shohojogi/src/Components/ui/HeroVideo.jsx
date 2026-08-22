@@ -9,6 +9,7 @@ export default function Hero() {
         autoPlay
         muted
         playsInline
+        loop
         className="absolute inset-0 h-full w-full object-cover"
       >
         <source src="src\assets\videos\hero_video.mp4" type="video/mp4" />
