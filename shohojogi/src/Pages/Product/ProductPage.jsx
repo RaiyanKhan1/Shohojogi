@@ -21,15 +21,8 @@ export default function ProductPage({ data = defaultProfileData }) {
       
 
       <ProfileHero identity={identity} credibility={credibility} />
-      <StatsStrip credibility={credibility} />
-
-          
-              
-                
-          
-          
+      <StatsStrip credibility={credibility} />     
       
-       
       <div className="fp-container">
         <div className="fp-layout-grid">
           <main className="fp-main-col">
