@@ -10,7 +10,7 @@ const services = [{name:"Plumbing", src:"src/assets/icons/plumber.svg" },
 
 const Services = () => {
   return (
-    <div>
+    <div className="m-2 md:m-0">
         <p className=" text-3xl font-bold mb-10">Popular Services</p>
        
        <div className='flex flex-wrap  gap-3 mb-6 justify-between'>
@@ -18,7 +18,8 @@ const Services = () => {
           <MagicCard 
             key={index}
             mode="orb" 
-            className="flex rounded-2xl p-1 shadow-sm hover:border-b-2" 
+            className="flex w-[calc(50%-0.375rem)]
+  md:w-[calc(33.333%-0.5rem)] rounded-2xl p-1 shadow-sm hover:border-b-2" 
             gradientSize="200" 
             gradientFrom="#296914" 
             gradientTo="#43cc16" 

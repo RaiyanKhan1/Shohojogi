@@ -33,7 +33,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="flex relative h-150 w-auto overflow-hidden rounded-3xl mb-5 shadow-lg">
+    <div className="flex relative h-100 md:h-150 w-auto overflow-hidden md:rounded-3xl mb-5 shadow-lg">
       
       {/* Video */}
       <video
@@ -49,7 +49,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/25 to-transparent" />
 
       {/* Hero content */}
-      <div className="relative z-10 flex flex-col h-full w-full items-start justify-around p-6">
+      <div className="relative z-10 flex flex-col h-full w-full items-start justify-around md:p-6">
         <div className="max-w-3xl px-6 items-start text-white">
           <h1 className="text-5xl font-bold md:text-7xl">
             Need a hand?

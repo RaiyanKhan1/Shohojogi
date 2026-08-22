@@ -11,10 +11,10 @@ function Homepage(){
   return (
     <div>
         <Navbar />
-        <div className="flex-col m-15 pt-10">
+        <div className="flex-col pt-15 md:pt-10 md:m-15">
         <HeroVideo />
         <div className='flex h-20 w-full items-center justify-center mb-10'>
-            <div className="flex h-full w-3/5 items-center justify-center mb-0 bg-green-700 border border-green-500 border-b-2 rounded-3xl shadow-xl">
+            <div className="flex h-full w-4/5 md:w-3/5 items-center justify-center mb-0 bg-green-700 border border-green-500 border-b-2 rounded-3xl shadow-xl">
                 <LayoutTextFlip text="Hire&nbsp;" words={["Plumbers" ,"Electricians", "Chauffeurs", "Guards", "Tutors", "and more!", ]}  duration="2500" boxTextColor="green-900"/>
             </div>
         </div>
@@ -22,8 +22,8 @@ function Homepage(){
         
         <Services />
         <div className='m-5'> </div>
-        <div className="flex flex-col justify-center items-center gap-10 h-100 w-auto rounded-2xl bg-linear-to-br from-green-950 via-green-800 to-green-700 border-2 border-green-500 border-b-3 shadow-[0px_1px_0px_rgba(0,0,0,0.2)]">
-          <p className="text-6xl text-white font-quicksand">Want to avail services instantly?</p>
+        <div className="flex flex-col justify-center items-center gap-5 md:gap-10 h-50 md:h-100 w-auto md:rounded-2xl bg-linear-to-br from-green-950 via-green-800 to-green-700 md:border-2 border-green-500 border-b-3 shadow-[0px_1px_0px_rgba(0,0,0,0.2)]">
+          <p className="text-2xl md:text-6xl text-white font-quicksand">Want to avail services instantly?</p>
       <NoiseBackground
         containerClassName="w-fit p-2 rounded-full mx-auto"
         gradientColors={[
@@ -42,7 +42,7 @@ function Homepage(){
        
         </div>
 
-        <div className='flex h-100 w-95% m-2 items-center justify-center rounded-2xl bg-linear-to-br from-slate-800 via-gray-900 to-gray-950'>
+        <div className='flex h-100 md:w-95% md:m-2 items-center justify-center md:rounded-2xl bg-linear-to-br from-slate-800 via-gray-900 to-gray-950'>
             <p className='text-4xl font-quicksand text-white font-bold'>&copy; Shohojogi</p>
 
         </div>
