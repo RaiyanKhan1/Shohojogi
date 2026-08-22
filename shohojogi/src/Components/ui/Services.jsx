@@ -13,7 +13,7 @@ const Services = () => {
   const navigate = useNavigate();
   return (
     <div className="m-2 lg:m-0 ">
-        <p className=" text-3xl font-bold mb-10">Popular Services</p>
+        <p className="text-3xl font-bold p-4 lg:p-0 lg:mb-5">Popular Services</p>
        
        <div className='flex flex-wrap p-4 lg:p-0 gap-5 mb-6 justify-between items-start'>
         {services.map((element, index) => (
