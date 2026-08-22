@@ -25,7 +25,6 @@ function App() {
         <Route path="/product" element={<ProductPage />} />
         <Route path="/join" element={<Join />} />
         <Route path="/why-shohojogi" element={<WhyShohojogi />}/>
-=======
         <Route path="/task" element={<TaskDetailsPage />} />
         
       </Routes>

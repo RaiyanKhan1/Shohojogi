@@ -1,34 +1,33 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
 
 :root {
-  /* surfaces */
+  
   --fp-bg: #feffff;
   --fp-surface: #004518;
   --fp-surface-2: #1c2025;
   --fp-border: #272c31;
   --fp-border-soft: #1f2327;
 
-  /* text */
+  
   --fp-text: #020202;
   --fp-text-muted: #9aa0a6;
   --fp-text-faint: #5f656b;
 
-  /* the color-grade pair */
+  
   --fp-amber: #f2a93b;
   --fp-amber-soft: rgba(29, 144, 0, 0.14);
   --fp-teal: #000000;
   --fp-teal-soft: rgba(1, 249, 18, 0.14);
 
-  /* status */
+  
   --fp-online: #4ade80;
 
-  /* type */
+ 
   --fp-font-display: 'Space Grotesk', system-ui, sans-serif;
   --fp-font-body: 'Inter', system-ui, sans-serif;
   --fp-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-  /* radii / spacing rhythm */
+ 
   --fp-radius-sm: 8px;
   --fp-radius-md: 14px;
   --fp-radius-lg: 22px;

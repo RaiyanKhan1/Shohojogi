@@ -1,3 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
+:root {
+ 
+  --fp-bg: #feffff;
+  --fp-surface: #004518;
+  --fp-surface-2: #1c2025;
+  --fp-border: #272c31;
+  --fp-border-soft: #1f2327;
+
+ 
+  --fp-text: #020202;
+  --fp-text-muted: #9aa0a6;
+  --fp-text-faint: #5f656b;
+
+  
+  --fp-amber: #f2a93b;
+  --fp-amber-soft: rgba(29, 144, 0, 0.14);
+  --fp-teal: #000000;
+  --fp-teal-soft: rgba(1, 249, 18, 0.14);
+
+ 
+  --fp-online: #4ade80;
+
+ 
+  --fp-font-display: 'Space Grotesk', system-ui, sans-serif;
+  --fp-font-body: 'Inter', system-ui, sans-serif;
+  --fp-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  
+  --fp-radius-sm: 8px;
+  --fp-radius-md: 14px;
+  --fp-radius-lg: 22px;
+}
+
 
 @keyframes td-fadeInUp {
   from { opacity: 0; transform: translateY(10px); }
@@ -30,9 +65,9 @@
   background:
     radial-gradient(680px 320px at 15% 0%, var(--fp-amber-soft), transparent 60%),
     radial-gradient(560px 300px at 90% 10%, var(--fp-teal-soft), transparent 60%);
-  margin-top: 70px;
+  margin-top: 80px;
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--fp-font-display);
 }
 
 .td-container {
@@ -59,13 +94,13 @@
 }
 
 .td-header__title {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 700;
   margin: 0;
 }
 
 .td-status-badge {
-  font-size: 12px;
+  font-size: 16px;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   background: #dcfce7;
   color: #166534;
@@ -149,13 +184,13 @@
 }
 
 .td-stat-box__value {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 700;
   line-height: 1;
 }
 
 .td-stat-box__label {
-  font-size: 12px;
+  font-size: 16px;
   color: #737373;
   margin-top: 8px;
 }
@@ -176,7 +211,7 @@
 
 .td-pill {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 12px;
+  font-size: 16px;
   border: 1px solid #000000;
   border-radius: 9999px;
   padding: 6px 12px;
@@ -187,7 +222,7 @@
 /* ---------- generic section ---------- */
 
 .td-section__title {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
   margin: 0 0 8px 0;
 }
@@ -214,7 +249,7 @@
   border: 1px solid #000000;
   border-radius: 8px;
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: 18px;
   transition: background-color 0.15s ease;
 }
 
@@ -242,7 +277,7 @@
 }
 
 .td-apply-card__price-unit {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   color: #737373;
 }
@@ -352,6 +387,7 @@
   align-items: center;
   gap: 4px;
   font-weight: 500;
+  font-size: 22px;
 }
 
 .td-poster-since {

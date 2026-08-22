@@ -33,10 +33,10 @@ const profileData = {
       
     
     safetytags: [
-      'NID Varified',
-      'Police Varification',
-      'Education Varified',
-      'Location Varified',
+      'NID Verified',
+      'Police Verified',
+      'Education Verified',
+      'Location Verified',
     ],
   },
 
