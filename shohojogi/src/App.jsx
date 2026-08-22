@@ -23,7 +23,7 @@ function App() {
          <Route path="/find-work" element={<FindWork />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/join" element={<Join />} />
-        <Route path="/why_shohojogi" element={<WhyShohojogi />}/>
+        <Route path="/why-shohojogi" element={<WhyShohojogi />}/>
         
       </Routes>
     </BrowserRouter>

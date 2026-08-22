@@ -28,7 +28,7 @@ const WhyShohojogi = () => {
       </div>
     </div>
         
-        <div className="flex flex-col md:flex-row justify-center items-stretch gap-10 p-10 m-5 md:m-0 md:p-15 w-auto rounded-2xl bg-linear-to-br from-green-950 via-green-800 to-green-700 border-2 border-green-500 border-b-3 shadow-[0px_1px_0px_rgba(0,0,0,0.2)]">
+        <div className="flex flex-col lg:flex-row justify-center items-stretch gap-10 p-10 m-5 md:m-0 md:p-15 w-auto rounded-2xl bg-linear-to-br from-green-950 via-green-800 to-green-700 border-2 border-green-500 border-b-3 shadow-[0px_1px_0px_rgba(0,0,0,0.2)]">
                 
                 <Card heading="Finding the Right Help Should Be Easy" text="Find the people and services you need, without the endless searching."/>
                 <Card heading="Work Made Simpler. People Made Closer" text="Connect with people, get things done, and build meaningful connections along the way."/>

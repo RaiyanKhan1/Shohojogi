@@ -3,7 +3,7 @@ import React from 'react'
 function SearchBar(){
   return (
     <div className=" flex h-15 w-full bg-none items-center rounded-full p-1">
-      <div className=" flex h-full w-full md:w-2/3 items-center m-4 p-1 rounded-full bg-white border border-gray-200 border-b-2 border-r-2 border-gray-300
+      <div className=" flex h-full w-full lg:w-2/3 items-center m-4 p-1 rounded-full bg-white border border-gray-200 border-b-2 border-r-2 border-gray-300
 
     shadow-[2px_3px_0px_rgba(0,0,0,0.12)] focus-within:outline-3 focus-within:outline-[hsl(65,93%,43%)] focus-within:outline-offset-3 transition-all duration-150
     focus-within:-translate-y-px">

@@ -33,9 +33,8 @@ export default function Hero() {
   };
 
   return (
-    <div className="flex relative h-100 md:h-150 w-auto overflow-hidden md:rounded-3xl mb-5 shadow-lg">
+    <div className="flex relative h-100 md:h-150 w-auto overflow-hidden lg:rounded-3xl mb-5 shadow-lg">
       
-      {/* Video */}
       <video
         ref={videoRef}
         onEnded={handleVideoEnd}
@@ -45,10 +44,10 @@ export default function Hero() {
         className="absolute inset-0 h-full w-full object-cover"
       />
 
-      {/* Dark overlay */}
+     
       <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/25 to-transparent" />
 
-      {/* Hero content */}
+      
       <div className="relative z-10 flex flex-col h-full w-full items-start justify-around md:p-6">
         <div className="max-w-3xl px-6 items-start text-white">
           <h1 className="text-5xl font-bold md:text-7xl">
@@ -59,9 +58,6 @@ export default function Hero() {
             Find trusted people to get it done, without breaking a sweat
           </p>
 
-          {/*<button className="mt-8 rounded-full bg-white px-6 py-3 font-semibold text-black">
-            Get Started
-          </button>*/}
         </div>
        <SearchBar/>
         

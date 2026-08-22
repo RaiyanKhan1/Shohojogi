@@ -2,7 +2,7 @@ import React from 'react'
 
 function Card ({name, src}){
   return (
-    <div className="container cursor-pointer flex-col h-50 w-40 md:h-60 md:w-50 border-none rounded-2xl  shadow-lg transition-all duration-300 hover:-translate-y-2">
+    <div className="container cursor-pointer flex-col h-50 w-40 md:h-55 md:w-40 lg:h-60 lg:w-50 border-none rounded-2xl  shadow-lg transition-all duration-300 hover:-translate-y-2">
         <div className="flex h-2/3 items-center justify-center border-b border-b-white">
             <img src={src} className=" h-12 w-12 rounded-full outline-gray-400/20 outline-1 outline-offset-10 ">
             </img>
