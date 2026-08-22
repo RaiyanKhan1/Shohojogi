@@ -20,11 +20,11 @@ const profileData = {
   },
 
   hire: {
-    rate: '$35',
-    rateUnit: '/ hr',
-    consultationPrice: '$25',
-    consultationUnit: 'per 30-min video call',
-    availability: 'Available for new projects',
+    rate: '500tk',
+    rateUnit: '/ job',
+    consultationPrice: '500tk',
+    
+    availability: 'Available for new job',
     responseTime: 'Usually responds in a few hours',
   },
 

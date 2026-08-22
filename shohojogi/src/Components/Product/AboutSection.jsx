@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function AboutSection({ about }) {
   return (
-    <section id="about" aria-labelledby="about-heading">
+    <section>
       <div className="fp-section-head">
         
         <h2 id="about-heading" className="fp-heading">About</h2>

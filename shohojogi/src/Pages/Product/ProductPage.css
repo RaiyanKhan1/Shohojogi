@@ -401,3 +401,36 @@
 .fp-div-trust-progrssbar {
   padding: 20px;
 }
+
+
+
+/* ==========================================================================
+   Hire card
+   ========================================================================== */
+.fp-hire-card { padding: 22px; background-color: var(--fp-amber-soft);}
+.fp-hire-rate { display: flex; align-items: baseline; gap: 4px; }
+.fp-hire-rate-value {
+  font-family: var(--fp-font-display);
+  font-size: 28px;
+  font-weight: 700;
+}
+.fp-hire-rate-unit { color: var(--fp-text-muted); font-size: 14px; }
+.fp-hire-sub { font-size: 13px; color: var(--fp-text-muted); margin-top: 4px; }
+.fp-hire-divider { height: 1px; background: var(--fp-border-soft); margin: 18px 0; }
+.fp-hire-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13.5px; color: var(--fp-text-muted);
+  margin-bottom: 10px;
+}
+.fp-availability-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--fp-online);
+  flex-shrink: 0;
+}
+.fp-hire-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+.fp-consult-note {
+  font-family: var(--fp-font-mono);
+  font-size: 12px;
+  color: var(--fp-text-faint);
+  text-align: center;
+}

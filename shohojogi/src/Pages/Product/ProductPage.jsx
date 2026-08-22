@@ -6,6 +6,7 @@ import ProfileHero from '../../Components/Product/ProfileHero.jsx';
 import StatsStrip from '../../Components/Product/StatsStrip.jsx';
 import AboutSection from '../../Components/Product/AboutSection.jsx';
 import TrustBadgeSection from '../../Components/Product/TrustBadgeSection.jsx';
+import HireCard from '../../Components/Product/HireCard.jsx';
 
 
 import defaultProfileData from '../../Data/profileData.js';
@@ -20,8 +21,11 @@ export default function ProductPage({ data = defaultProfileData }) {
       <ProfileHero identity={identity} credibility={credibility} />
       <StatsStrip credibility={credibility} />
 
-      
-          <TrustBadgeSection about={about} />
+          
+               <TrustBadgeSection about={about} />
+               <AboutSection about={about} />
+          
+          
       
        
       <div className="fp-container">
@@ -33,7 +37,7 @@ export default function ProductPage({ data = defaultProfileData }) {
           </main>
 
           <aside className="fp-side-col">
-            
+            <HireCard hire={hire} />
           </aside>
         </div>
       </div>
