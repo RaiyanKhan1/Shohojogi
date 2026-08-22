@@ -19,7 +19,7 @@ function Homepage(){
         <HeroVideo />
         <div className='flex h-20 w-full items-center justify-center mb-10'>
             <div className="flex h-full w-4/5 md:w-3/5 items-center justify-center mb-0 bg-green-700 border border-green-500 border-b-2 rounded-3xl shadow-xl">
-                <LayoutTextFlip text="Hire&nbsp;" words={["Plumbers" ,"Electricians", "Chauffeurs", "Guards", "Tutors", "and more!", ]}  duration="2500" boxTextColor="green-900"/>
+                <LayoutTextFlip text="Hire&nbsp;" words={[ "Tutors", "Tour Guides", "Plumbers", "Electricians", "Chauffeurs", "Guards", "and more!", ]}  duration="2500" boxTextColor="green-900"/>
             </div>
         </div>
         
