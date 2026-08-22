@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from "react";
-import { LayoutTextFlip } from "./layout-text-flip";
 import SearchBar from "./SearchBar";
 
 export default function Hero() {
