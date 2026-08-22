@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
+  UserRoundSearch,
   BriefcaseBusiness,
-  Laptop,
   ArrowRight,
   ArrowLeft,
 } from "lucide-react";
@@ -26,7 +26,6 @@ function Join() {
     }
   };
 
-  // Client/Freelancer selection screen
   if (mode === "choose") {
     return (
       <main className="join-page">
@@ -38,14 +37,14 @@ function Join() {
           </p>
 
           <div className="role-grid">
-            {/* Client option */}
+       
             <button
               className="role-card"
               type="button"
               onClick={() => openSignup("client")}
             >
               <span className="role-visual">
-                <BriefcaseBusiness
+                <UserRoundSearch
                   size={74}
                   strokeWidth={1.6}
                 />
@@ -61,14 +60,13 @@ function Join() {
               </span>
             </button>
 
-            {/* Freelancer option */}
             <button
               className="role-card"
               type="button"
               onClick={() => openSignup("freelancer")}
             >
               <span className="role-visual">
-                <Laptop
+                <BriefcaseBusiness
                   size={74}
                   strokeWidth={1.6}
                 />
@@ -99,7 +97,7 @@ function Join() {
     );
   }
 
-  // Login and signup form
+ 
   return (
     <main className="join-page">
       <section className="auth-card">

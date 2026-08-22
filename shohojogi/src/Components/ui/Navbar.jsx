@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Navbar(){
 
-    const navLinks = [{ name: "Find Work", link: "" },
+    const navLinks = [{ name: "Find Work", link: "/find-work" },
                       { name: "Hire People", link: "/collections" },
                       { name: "Why Shohojogi", link: "/why_shohojogi" },
                       { name: "Contact", link: "" },];

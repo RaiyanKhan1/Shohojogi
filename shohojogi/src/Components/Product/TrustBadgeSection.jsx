@@ -9,7 +9,7 @@ export default function TrustBadgeSection({ about }) {
   return (
     <section className="fp-trust-container">
     <div className="fp-trust-row">
-       <h2 className="fp-trust-text">Trust Badges: </h2>
+       
         
       <div className="fp-trust-tags">
         {about.safetytags.map((tag) => (

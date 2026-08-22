@@ -434,3 +434,77 @@
   color: var(--fp-text-faint);
   text-align: center;
 }
+
+/* ==========================================================================
+   Skills
+   ========================================================================== */
+.fp-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  
+}
+@media (max-width: 560px) { 
+  .fp-skills-grid { grid-template-columns: 1fr; 
+  } 
+}
+
+.fp-skill-card {
+  padding: 14px 16px;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px dashed;
+  border-radius: 10px;
+  
+}
+.fp-skill-name { 
+  font-size: 14.5px; 
+  font-weight: 500; 
+}
+
+/* ==========================================================================
+   Work history 
+   ========================================================================== */
+.fp-timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+.fp-timeline-item {
+  position: relative;
+  padding: 0 0 28px 28px;
+  border-left: 1px solid var(--fp-border);
+}
+
+.fp-timeline-dot {
+  position: absolute;
+  left: -5px; top: 8px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--fp-bg);
+  border: 2px solid var(--fp-teal);
+}
+.fp-timeline-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+.fp-timeline-role { font-weight: 600; font-size: 15px; }
+.fp-timeline-feedback { color: var(--fp-text-muted); font-size: 13.5px; margin-top: 2px; }
+.fp-timeline-client{
+  margin-top: 5px;
+   font-weight: 600; font-size: 12px;
+   color: var(--fp-surface);
+}
+.fp-timeline-time {
+  font-family: var(--fp-font-mono);
+  font-size: 12px;
+  color: var(--fp-text-faint);
+  white-space: nowrap;
+}
+.fp-timeline-outcome { font-size: 14px; color: var(--fp-text-muted); margin-top: 10px; max-width: 60ch; }
+.fp-timeline-budget {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--fp-font-mono);
+  font-size: 12px;
+  color: var(--fp-teal);
+}
+
