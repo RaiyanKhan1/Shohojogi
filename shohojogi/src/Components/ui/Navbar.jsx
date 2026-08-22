@@ -28,7 +28,7 @@ function Navbar(){
            {navLinks.map((item, index) => (
             <li key={index} className="cursor-pointer font-quicksand font-light hover:text-green-700 p-0.5 group relative">
             
-              <NavLink to={item.link} className={({isActive}) => `p-2 border-2 rounded-full transition-all  ${isActive ? "bg-green-700 border-green-500 text-white shadow-[0px_1px_0.9px_rgb(211,211,211)]" : "text-gray-700 border-white hover:text-green-700"}`}>
+              <NavLink to={item.link}>
             {item.name}
  
                 <span className="
