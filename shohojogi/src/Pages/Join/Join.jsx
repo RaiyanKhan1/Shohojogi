@@ -26,7 +26,7 @@ function Join() {
     }
   };
 
- 
+  // Client/Freelancer selection screen
   if (mode === "choose") {
     return (
       <main className="join-page">
@@ -53,7 +53,7 @@ function Join() {
 
               <span className="role-title">
                 Client
-                <ArrowRight size={22} />
+                <ArrowRight size={25} />
               </span>
 
               <span className="role-description">
@@ -76,7 +76,7 @@ function Join() {
 
               <span className="role-title">
                 Shohojogi
-                <ArrowRight size={22} />
+                <ArrowRight size={25} />
               </span>
 
               <span className="role-description">
