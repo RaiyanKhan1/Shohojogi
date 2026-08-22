@@ -62,7 +62,8 @@
   --sidebar-ring: oklch(0.708 0 0)
 }
 
-body {
+
+#root {
   margin: 0;
 }
 
@@ -75,14 +76,16 @@ body {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
+
+.service-list h1,
+.service-list h2 {
   font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
 }
 
-h1 {
+
+.service-list h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
   margin: 32px 0;
@@ -91,7 +94,8 @@ h1 {
     margin: 20px 0;
   }
 }
-h2 {
+
+.service-list h2 {
   font-size: 24px;
   line-height: 118%;
   letter-spacing: -0.24px;
@@ -100,11 +104,13 @@ h2 {
     font-size: 20px;
   }
 }
-p {
+
+.service-list p {
   margin: 0;
 }
 
-code {
+
+.service-list code {
   font-family: var(--mono);
   display: inline-flex;
   border-radius: 4px;
