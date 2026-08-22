@@ -4,8 +4,8 @@ import './JobList.css'
 function JobCard({ job }) {
   return (
     <div className="job-card">
-      <p className="job-title">
-        {job.title}
+      <div className="job-title-block">
+        <p className="job-title">{job.title}</p>
         {job.trustLevel && (
           <span className={`verify-tag verify-tag--${job.trustLevel.toLowerCase()}`}>
             {job.trustLevel === 'Verified' && '✓ NID & CV Verified'}
@@ -13,7 +13,7 @@ function JobCard({ job }) {
             {job.trustLevel === 'CV' && '✓ CV Verified'}
           </span>
         )}
-      </p>
+      </div>
       <p className="job-meta">{job.type} - Posted {job.postedAgo}</p>
 
       <p className="job-desc">{job.description}</p>

@@ -126,10 +126,15 @@
   letter-spacing: -0.2px;
 }
 
+.job-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .verify-tag {
   display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
+  width: fit-content;
   font-family: var(--sans);
   font-size: 12px;
   font-weight: 600;
