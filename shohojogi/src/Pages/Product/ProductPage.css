@@ -123,7 +123,7 @@
 .fp-btn-secondary:hover { border-color: var(--fp-teal); color: var(--fp-teal); }
 
 .fp-container {
-  max-width: 1160px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 24px;
 }
