@@ -8,6 +8,7 @@ import AboutSection from '../../Components/Product/AboutSection.jsx';
 import TrustBadgeSection from '../../Components/Product/TrustBadgeSection.jsx';
 import HireCard from '../../Components/Product/HireCard.jsx';
 import SkillsPanel from '../../Components/Product/SkillsPanel.jsx';
+import WorkHistory from '../../Components/Product/WorkHistory.jsx';
 
 
 import defaultProfileData from '../../Data/profileData.js';
@@ -35,11 +36,13 @@ export default function ProductPage({ data = defaultProfileData }) {
              <TrustBadgeSection about={about} />
           <AboutSection about={about} />
            <SkillsPanel skills={skills} />
+           
               
           </main>
 
           <aside className="fp-side-col">
             <HireCard hire={hire} />
+            <WorkHistory history={history} />
           </aside>
         </div>
       </div>

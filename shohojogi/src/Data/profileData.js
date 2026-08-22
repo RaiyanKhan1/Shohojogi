@@ -2,11 +2,11 @@
 
 const profileData = {
   identity: {
-    name: 'Raiyan.',
-    title: 'Tutor',
+    name: 'Shakib',
+    title: 'Delivery parcel, grocery shopping',
     avatarUrl: 'https://img.magnific.com/premium-photo/young-brazilian-man-isolated-white-background-laughing_1368-362553.jpg?semt=ais_hybrid&w=740&q=80',
     location: 'Uttara, Dhaka',
-    status: 'offline',
+    status: 'online',
     verified: true,
   },
 
@@ -29,7 +29,7 @@ const profileData = {
   },
 
   about: {
-    bio: "I'm on currently mentoring many students, teaching them from the basics",
+    bio: "Hey, I have been doing grocery shopping for long time (certified by my mom). You can trust me that I will pick the best and fresh items from the shop for you! ",
       
     
     safetytags: [
@@ -59,27 +59,27 @@ const profileData = {
   history: [
     {
       id: 1,
-      client: 'DTC Skincare Brand',
-      role: 'UGC Ad Creator',
-      timeframe: 'Jun – Jul 2026',
-      outcome: 'Delivered 12 vertical ad variants for paid social testing.',
-      budget: '$450 fixed',
+      client: 'Raiyan',
+      role: 'Grocery shopping',
+      timeframe: 'Jul 2026',
+     
+      budget: '500tk',
     },
     {
       id: 2,
-      client: 'Footwear Startup',
-      role: 'Cinematic Product Video',
+      client: 'Sumaiya Joya',
+      role: 'Delivering a percel',
       timeframe: 'Apr 2026',
-      outcome: 'Produced a 45-second launch spot from concept to final grade.',
-      budget: '$600 fixed',
+      
+      budget: '1000tk',
     },
     {
       id: 3,
-      client: 'SaaS Company',
-      role: 'AI Explainer Clips',
-      timeframe: 'Feb – Mar 2026',
-      outcome: 'Built 8 short-form explainer cutdowns for onboarding.',
-      budget: '$30/hr · 14 hrs',
+      client: 'Delivering a letter',
+      role: 'Ahanf',
+      timeframe: 'Feb 2026',
+     
+      budget: '900tk',
     },
   ],
 

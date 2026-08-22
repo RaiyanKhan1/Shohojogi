@@ -464,3 +464,42 @@
   font-weight: 500; 
 }
 
+/* ==========================================================================
+   Work history 
+   ========================================================================== */
+.fp-timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+.fp-timeline-item {
+  position: relative;
+  padding: 0 0 28px 28px;
+  border-left: 1px solid var(--fp-border);
+}
+.fp-timeline-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+.fp-timeline-dot {
+  position: absolute;
+  left: -5px; top: 2px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--fp-bg);
+  border: 2px solid var(--fp-teal);
+}
+.fp-timeline-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+.fp-timeline-role { font-weight: 600; font-size: 15px; }
+.fp-timeline-client { color: var(--fp-text-muted); font-size: 13.5px; margin-top: 2px; }
+.fp-timeline-time {
+  font-family: var(--fp-font-mono);
+  font-size: 12px;
+  color: var(--fp-text-faint);
+  white-space: nowrap;
+}
+.fp-timeline-outcome { font-size: 14px; color: var(--fp-text-muted); margin-top: 10px; max-width: 60ch; }
+.fp-timeline-budget {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--fp-font-mono);
+  font-size: 12px;
+  color: var(--fp-teal);
+}
+
