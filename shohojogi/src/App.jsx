@@ -8,11 +8,8 @@ import Collections from "./pages/Collections/Collections.jsx";
 import FindWork from "./Pages/FindWork/FindWork.jsx";
 import Join from "./Pages/Join/Join.jsx";
 import ProductPage from './Pages/Product/ProductPage.jsx'
-<<<<<<< Updated upstream
 import WhyShohojogi from './Pages/Why Shohojogi/WhyShohojogi.jsx';
-=======
 import TaskDetailsPage from './Pages/TaskDetails/TaskDetailsPage.jsx'
->>>>>>> Stashed changes
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,11 +24,9 @@ function App() {
          <Route path="/find-work" element={<FindWork />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/join" element={<Join />} />
-<<<<<<< Updated upstream
         <Route path="/why-shohojogi" element={<WhyShohojogi />}/>
 =======
         <Route path="/task" element={<TaskDetailsPage />} />
->>>>>>> Stashed changes
         
       </Routes>
     </BrowserRouter>
