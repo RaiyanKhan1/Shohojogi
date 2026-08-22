@@ -3,7 +3,7 @@ import React from 'react'
 
 function Card({heading, text}){
     return(
-        <div className="flex flex-col justify-evenly gap-3 md:gap-0 h-10 md:h-70 min-w-0 flex-1 bg-white border-3 border-b-4 shadow-2xl border-gray-300 text-center p-6 rounded-2xl bg-linear-to-br from-slate-200 via-gray-100 to-white">
+        <div className="flex flex-col justify-evenly gap-3 md:gap-0 h-10 md:h-70 min-w-0 flex-1 bg-white border-3 border-b-4 shadow-2xl  border-gray-300 hover:border-green-500 hover:-translate-y-2 transition-all duration-300 text-center p-6 rounded-2xl bg-linear-to-br from-slate-200 via-gray-100 to-white">
             <h1 className="text-xl md:text-2xl font-bold text-gray-800">{heading}</h1>
             <p className="text-gray-600 font-light">{text}</p>       
         </div>
