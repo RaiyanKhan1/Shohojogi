@@ -8,7 +8,7 @@ function Card ({name, src}){
             </img>
         </div>
         <div className="flex h-1/3 items-center justify-center pb-6">
-            <p className='text-gray-600 font-quicksand'>{name}</p>
+            <p className='text-gray-600'>{name}</p>
         </div>
         
     </div>

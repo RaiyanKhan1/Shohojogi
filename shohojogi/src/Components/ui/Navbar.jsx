@@ -9,7 +9,7 @@ function Navbar(){
 
     const navLinks = [{ name: "Find Work", link: "" },
                       { name: "Hire People", link: "/collections" },
-                      { name: "Why Shohojogi", link: "" },
+                      { name: "Why Shohojogi", link: "/why_shohojogi" },
                       { name: "Contact", link: "" },];
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
@@ -26,7 +26,7 @@ function Navbar(){
           <div className="hidden md:flex ml-auto items-center gap-3">
         <ul className="flex gap-4 lg:gap-5">
            {navLinks.map((item, index) => (
-            <li key={index} className="cursor-pointer font-quicksand font-light hover:text-green-700 p-0.5 group relative">
+            <li key={index} className="cursor-pointer font-light hover:text-green-700 p-0.5 group relative">
             
               <NavLink to={item.link}>
             {item.name}

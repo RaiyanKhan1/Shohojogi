@@ -11,7 +11,7 @@ const services = [{name:"Plumbing", src:"src/assets/icons/plumber.svg" },
 const Services = () => {
   return (
     <div>
-        <p className="font-quicksand text-3xl font-bold mb-10">Popular Services</p>
+        <p className=" text-3xl font-bold mb-10">Popular Services</p>
        
        <div className='flex flex-wrap  gap-3 mb-6 justify-between'>
         {services.map((element, index) => (
