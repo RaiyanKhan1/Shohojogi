@@ -63,7 +63,7 @@ function Join() {
             <button
               className="role-card"
               type="button"
-              onClick={() => openSignup("freelancer")}
+              onClick={() => openSignup("Shohojogi")}
             >
               <span className="role-visual">
                 <BriefcaseBusiness
