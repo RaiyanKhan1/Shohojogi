@@ -1,4 +1,4 @@
-// Mock task data — replace with a real API call once the backend is ready.
+
 const task = {
   title: "Grocery shopping",
   category: "Grocery shopping",
