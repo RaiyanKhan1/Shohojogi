@@ -43,7 +43,6 @@
   -webkit-font-smoothing: antialiased;
 }
 .fp-page *,
-.fp-page *::before,
 .fp-page *::after { box-sizing: border-box; }
 .fp-page img { max-width: 100%; display: block; }
 .fp-page a { color: inherit; text-decoration: none; }
