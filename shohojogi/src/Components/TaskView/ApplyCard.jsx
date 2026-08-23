@@ -22,7 +22,7 @@ export default function ApplyCard({ budget, applicants }) {
       >
         {applied ? (
           <>
-            <CheckCircle2 size={16} className="td-pop" /> Application sent
+            <CheckCircle2 size={16} /> Application sent
           </>
         ) : (
           <>

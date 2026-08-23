@@ -39,15 +39,10 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes td-pop {
-  0%   { transform: scale(0.6); }
-  60%  { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
-
 @keyframes td-pulse {
-  0%, 100% { opacity: 1; }
+  0%, 
   50% { opacity: 0.4; }
+  100% { opacity: 1; }
 }
 
 .td-fade-in-up {
@@ -55,9 +50,6 @@
   animation: td-fadeInUp 0.5s ease-out forwards;
 }
 
-.td-pop {
-  animation: td-pop 0.25s ease-out;
-}
 
 /* ---------- page shell ---------- */
 
