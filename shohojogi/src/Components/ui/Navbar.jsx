@@ -19,7 +19,6 @@ function Navbar(){
     const user = stored ? JSON.parse(stored) : null;
 
     const handleLogout = async () => {
-  // Ask the server to clear the cookie
   await fetch(`${import.meta.env.VITE_API_URL}/${user.role}/logout`, {
     method: "POST",
     credentials: "include",
@@ -60,10 +59,7 @@ function Navbar(){
       {user ? (
   <div className="flex items-center gap-3">
     <span className="font-light">Hi, {user.name}</span>
-    <InteractiveHoverButton
-      className="border-2 border-green-500"
-      onClick={handleLogout}
-    >
+    <InteractiveHoverButton className="border-2 border-green-500" onClick={handleLogout}>
       Log out
     </InteractiveHoverButton>
   </div>
@@ -92,7 +88,19 @@ function Navbar(){
            ))}
         </ul>
 
-        <InteractiveHoverButton className={"border-2 border-green-800"} onClick={() => { navigate("/join"); setMenuOpen(false); }}>Join Now</InteractiveHoverButton>
+          {user ? (
+  <div className="flex items-center gap-3">
+    <span className="font-light">Hi, {user.name}</span>
+    <InteractiveHoverButton className="border-2 border-green-500" onClick={handleLogout}>
+      Log out
+    </InteractiveHoverButton>
+  </div>
+) : (
+<InteractiveHoverButton className={"border-2 border-green-800"} onClick={() => { navigate("/join"); setMenuOpen(false); }}>
+    Join Now
+    </InteractiveHoverButton>
+)}
+        {/* <InteractiveHoverButton className={"border-2 border-green-800"} onClick={() => { navigate("/join"); setMenuOpen(false); }}>Join Now</InteractiveHoverButton> */}
 
         </div>)}
     </nav>
