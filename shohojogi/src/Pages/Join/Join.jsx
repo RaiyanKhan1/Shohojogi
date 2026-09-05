@@ -206,27 +206,7 @@ const [loading, setLoading] = useState(false);//
   {loading ? "Please wait..." : mode === "login" ? "Log in" : "Create account"}
 </button>
         </form>
-
-        <p className="account-switch">
-          {mode === "login"
-            ? "Don't have an account? "
-            : "Already have an account? "}
-
-          <button
-            type="button"
-            onClick={() =>
-              setMode(
-                mode === "login"
-                  ? "choose"
-                  : "login"
-              )
-            }
-          >
-            {mode === "login"
-              ? "Sign up"
-              : "Log in"}
-          </button>
-        </p>
+ 
       </section>
     </main>
   );
