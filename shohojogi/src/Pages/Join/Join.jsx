@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";// new
 import {
   UserRoundSearch,
   BriefcaseBusiness,
@@ -10,22 +11,56 @@ import "./Join.css";
 function Join() {
   const [mode, setMode] = useState("choose");
   const [role, setRole] = useState("");
-
+  const navigate = useNavigate();//
+ const [error, setError] = useState("");//
+const [loading, setLoading] = useState(false);//
   const openSignup = (selectedRole) => {
     setRole(selectedRole);
     setMode("signup");
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+   const handleSubmit = async (event) => {
+  event.preventDefault();
+  setError("");
+  setLoading(true);
 
-    if (mode === "login") {
-      console.log("Login submitted");
-    } else {
-      console.log("Signup submitted as:", role);
-    }
-  };
+  const form = new FormData(event.target);
+  const isLogin = mode === "login";
 
+  
+ const url = `${import.meta.env.VITE_API_URL}/${role}/${isLogin ? "login" : "signup"}`;
+
+
+  const body = isLogin
+    ? {
+        email: form.get("email"),
+        password: form.get("password"),
+      }
+    : {
+        name: form.get("fullName"), 
+        email: form.get("email"),
+        password: form.get("password"),
+      };
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",      
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    window.location.href = "/";
+  } catch (err) {
+    setError(err.message || "Something went wrong");
+    setLoading(false);
+  }
+};
   if (mode === "choose") {
     return (
       <main className="join-page">
@@ -63,7 +98,7 @@ function Join() {
             <button
               className="role-card"
               type="button"
-              onClick={() => openSignup("Shohojogi")}
+              onClick={() => openSignup("Worker")}//new
             >
               <span className="role-visual">
                 <BriefcaseBusiness
@@ -165,14 +200,11 @@ function Join() {
             required
           />
 
-          <button
-            className="submit-button"
-            type="submit"
-          >
-            {mode === "login"
-              ? "Log in"
-              : "Create account"}
-          </button>
+           {error && <p className="form-error">{error}</p>}
+
+<button className="submit-button" type="submit" disabled={loading}>
+  {loading ? "Please wait..." : mode === "login" ? "Log in" : "Create account"}
+</button>
         </form>
 
         <p className="account-switch">
