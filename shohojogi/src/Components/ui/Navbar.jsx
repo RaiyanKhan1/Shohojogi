@@ -15,8 +15,19 @@ function Navbar(){
                         ];
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
-    
-  
+    const stored = localStorage.getItem("user");
+    const user = stored ? JSON.parse(stored) : null;
+
+    const handleLogout = async () => {
+  // Ask the server to clear the cookie
+  await fetch(`${import.meta.env.VITE_API_URL}/${user.role}/logout`, {
+    method: "POST",
+    credentials: "include",
+  });
+
+  localStorage.removeItem("user");
+  window.location.href = "/";
+};
 
     
   return (
@@ -46,7 +57,24 @@ function Navbar(){
            ))}
         </ul>
     
-      <InteractiveHoverButton className={"border-2 border-green-500"} onClick={() => navigate("/join")}>Join Now</InteractiveHoverButton>
+      {user ? (
+  <div className="flex items-center gap-3">
+    <span className="font-light">Hi, {user.name}</span>
+    <InteractiveHoverButton
+      className="border-2 border-green-500"
+      onClick={handleLogout}
+    >
+      Log out
+    </InteractiveHoverButton>
+  </div>
+) : (
+  <InteractiveHoverButton
+    className="border-2 border-green-500"
+    onClick={() => navigate("/join")}
+  >
+    Join Now
+  </InteractiveHoverButton>
+)}
         </div>
 
         <button onClick={() => setMenuOpen(!menuOpen)} className='md:hidden p-2 rounded-lg hover:bg-gray-200 transition'>
