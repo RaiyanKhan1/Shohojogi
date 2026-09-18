@@ -7,19 +7,12 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Collections from "./pages/Collections/Collections.jsx";
 import FindWork from "./Pages/FindWork/FindWork.jsx";
 import Join from "./Pages/Join/Join.jsx";
-<<<<<<< Updated upstream
 import ProductPage from "./Pages/Product/ProductPage.jsx";
 import WhyShohojogi from "./Pages/Why Shohojogi/WhyShohojogi.jsx";
 import TaskDetailsPage from "./Pages/TaskDetails/TaskDetailsPage.jsx";
 import PostTask from "./Pages/PostTask/PostTask.jsx";
+import PostService from "./Pages/PostTask/PostService.jsx";
 import AdminPage from "./Pages/Admin/AdminPage.jsx";
-=======
-import ProductPage from './Pages/Product/ProductPage.jsx'
-import WhyShohojogi from './Pages/Why Shohojogi/WhyShohojogi.jsx';
-import TaskDetailsPage from './Pages/TaskDetails/TaskDetailsPage.jsx'
-import PostTask from './Pages/PostTask/PostTask.jsx';
-import PostService from './Pages/PostTask/PostService.jsx';
->>>>>>> Stashed changes
 
 function AppContent() {
   const location = useLocation();
@@ -39,13 +32,8 @@ function AppContent() {
         <Route path="/why-shohojogi" element={<WhyShohojogi />} />
         <Route path="/task" element={<TaskDetailsPage />} />
         <Route path="/post-task" element={<PostTask />} />
-<<<<<<< Updated upstream
-
-        <Route path="/admin" element={<AdminPage />} />
-=======
         <Route path="/post-service" element={<PostService />} />
-        
->>>>>>> Stashed changes
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </>
   );
