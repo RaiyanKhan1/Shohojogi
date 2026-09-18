@@ -11,9 +11,6 @@ import ProductPage from "./Pages/Product/ProductPage.jsx";
 import WhyShohojogi from "./Pages/Why Shohojogi/WhyShohojogi.jsx";
 import TaskDetailsPage from "./Pages/TaskDetails/TaskDetailsPage.jsx";
 import PostTask from "./Pages/PostTask/PostTask.jsx";
-import ProductPage from "./Pages/Product/ProductPage.jsx";
-import WhyShohojogi from "./Pages/Why Shohojogi/WhyShohojogi.jsx";
-import TaskDetailsPage from "./Pages/TaskDetails/TaskDetailsPage.jsx";
 import AdminPage from "./Pages/Admin/AdminPage.jsx";
 
 function AppContent() {
