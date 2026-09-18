@@ -7,7 +7,7 @@ export const LayoutTextFlip = ({
   boxTextColor = "black",
   text = "Build Amazing",
   words = ["Landing Pages", "Component Blocks", "Page Sections", "3D Shaders"],
-  duration = 3000
+  duration = 3000,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -23,14 +23,16 @@ export const LayoutTextFlip = ({
     <>
       <motion.span
         layoutId="subtext"
-        className="text-2xl text-white font-bold tracking-tight drop-shadow-lg md:text-4xl">
+        className="text-2xl text-green-700 font-bold tracking-tight drop-shadow-lg md:text-4xl"
+      >
         {text}
       </motion.span>
 
       <motion.span
         layout
         style={{ color: boxTextColor }}
-        className="relative w-fit overflow-hidden rounded-md border border-transparent bg-white px-4 py-2 font-sans text-2xl font-bold tracking-tight text-green-700 shadow-sm ring shadow-black/10 ring-black/10 drop-shadow-lg md:text-4xl dark:bg-neutral-900 dark:text-white dark:shadow-sm dark:ring-1 dark:shadow-white/10 dark:ring-white/10">
+        className="relative w-fit overflow-hidden rounded-md border border-transparent bg-green-700 px-4 py-2 font-sans text-2xl font-bold tracking-tight text-white shadow-sm ring shadow-black/10 ring-black/10 drop-shadow-lg md:text-4xl dark:bg-neutral-900 dark:text-white dark:shadow-sm dark:ring-1 dark:shadow-white/10 dark:ring-white/10"
+      >
         <AnimatePresence mode="popLayout">
           <motion.span
             key={currentIndex}
@@ -43,7 +45,8 @@ export const LayoutTextFlip = ({
             transition={{
               duration: 0.5,
             }}
-            className={cn("inline-block whitespace-nowrap")}>
+            className={cn("inline-block whitespace-nowrap")}
+          >
             {words[currentIndex]}
           </motion.span>
         </AnimatePresence>

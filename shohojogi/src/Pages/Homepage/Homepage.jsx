@@ -23,7 +23,7 @@ function Homepage() {
 
         {/* SERVICE STRIP */}
         <div className="flex h-20 w-full items-center justify-center mt-6 mb-2 md:mt-8 md:mb-4">
-          <div className="flex h-full w-4/5 md:w-3/5 items-center justify-center mb-0 bg-green-700 border border-green-500 border-b-2 rounded-3xl shadow-xl">
+          <div className="flex h-full w-4/5 md:w-3/5 items-center justify-center mb-0 bg-white ">
             <LayoutTextFlip
               text="Hire&nbsp;"
               words={[
