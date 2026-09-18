@@ -1,9 +1,8 @@
 import React from "react";
 import Navbar from "../../Components/ui/Navbar";
-import { LayoutTextFlip } from "../../Components/ui/layout-text-flip";
 import HeroVideo from "../../Components/ui/heroVideo";
+import Hero from "../../Components/ui/Hero";
 import Services from "../../Components/ui/Services";
-import Reviews from "../../Components/ui/Reviews";
 import { NoiseBackground } from "../../Components/ui/noise-background";
 import { useNavigate } from "react-router-dom";
 import { CircleCheck, MapPin, Zap, Plus } from "lucide-react";
@@ -16,39 +15,19 @@ function Homepage() {
       <Navbar />
 
       <main className="pt-20 md:pt-20">
-        {/* HERO  */}
+        {/* ================= HERO ================= */}
         <section className="mx-2 md:mx-4 lg:mx-8">
-          <HeroVideo />
+          <Hero />
         </section>
 
-        {/* SERVICE STRIP */}
-        <div className="flex h-20 w-full items-center justify-center mt-6 mb-2 md:mt-8 md:mb-4">
-          <div className="flex h-full w-4/5 md:w-3/5 items-center justify-center mb-0 bg-green-700 border border-green-500 border-b-2 rounded-3xl shadow-xl">
-            <LayoutTextFlip
-              text="Hire&nbsp;"
-              words={[
-                "Tutors",
-                "Tour Guides",
-                "Plumbers",
-                "Electricians",
-                "Chauffeurs",
-                "Guards",
-                "and more!",
-              ]}
-              duration="2500"
-              boxTextColor="green-900"
-            />
-          </div>
-        </div>
-
-        {/* SERVICES */}
+        {/* ============== SERVICES ============== */}
         <section className="px-4 pt-2 pb-8 md:px-8 md:pt-4 md:pb-14">
           <div className="mx-auto max-w-7xl">
             <Services />
           </div>
         </section>
 
-        {/*  HOW IT WORKS */}
+        {/* ============== HOW IT WORKS ============== */}
         <section className="bg-gray-50 px-6 py-20 md:px-10 md:py-28">
           <div className="mx-auto max-w-6xl">
             <div className="mb-12 text-center">
@@ -104,7 +83,7 @@ function Homepage() {
           </div>
         </section>
 
-        {/* WHY SHOHOJOGI */}
+        {/* ============== WHY SHOHOJOGI ============== */}
         <section className="px-6 py-20 md:px-10 md:py-28">
           <div className="mx-auto max-w-6xl">
             <div className="grid items-center gap-12 md:grid-cols-2">
@@ -176,10 +155,152 @@ function Homepage() {
           </div>
         </section>
 
-        {/*REVIEWS */}
-        <Reviews />
+        {/* ================= REVIEWS ================= */}
+        <section className="overflow-hidden bg-gray-50 py-20 md:py-25">
+          <div className="mx-auto max-w-7xl">
+            {/* Section Heading */}
+            <div className="mb-12 px-6 text-center md:px-10">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
+                What people say
+              </p>
 
-        {/* CTA */}
+              <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-5xl">
+                Trusted by people like you.
+              </h2>
+
+              <p className="mx-auto mt-4 max-w-2xl text-gray-500 md:text-lg">
+                See what our users have to say about finding the right help.
+              </p>
+            </div>
+
+            {/* Continuous Scrolling Reviews */}
+            <div className="relative overflow-hidden">
+              <div className="flex w-max animate-[reviewScroll_35s_linear_infinite] gap-5 hover:paused">
+                {[
+                  {
+                    name: "Nafis Rahman",
+                    role: "Homeowner",
+                    review:
+                      "I needed a plumber for a leaking kitchen sink and found someone quickly. The whole process was surprisingly simple.",
+                  },
+                  {
+                    name: "Sadia Ahmed",
+                    role: "Student",
+                    review:
+                      "Finding a tutor used to take so much time. Shohojogi made it much easier to find someone who matched what I needed.",
+                  },
+                  {
+                    name: "Tanvir Hasan",
+                    role: "Service Provider",
+                    review:
+                      "I joined Shohojogi to find local work and got my first job shortly after. The platform is really straightforward.",
+                  },
+                  {
+                    name: "Maliha Karim",
+                    role: "Customer",
+                    review:
+                      "I needed an electrician urgently and didn't know who to call. Shohojogi helped me find someone without the usual hassle.",
+                  },
+                  {
+                    name: "Rafiul Islam",
+                    role: "Chauffeur",
+                    review:
+                      "The platform gives service providers a simple way to connect with people who actually need their skills.",
+                  },
+                  {
+                    name: "Faria Noor",
+                    role: "Customer",
+                    review:
+                      "What I like most is how easy everything feels. You post what you need and can start looking for the right person.",
+                  },
+
+                  // Duplicate reviews for seamless infinite scrolling
+                  {
+                    name: "Nafis Rahman",
+                    role: "Homeowner",
+                    review:
+                      "I needed a plumber for a leaking kitchen sink and found someone quickly. The whole process was surprisingly simple.",
+                  },
+                  {
+                    name: "Sadia Ahmed",
+                    role: "Student",
+                    review:
+                      "Finding a tutor used to take so much time. Shohojogi made it much easier to find someone who matched what I needed.",
+                  },
+                  {
+                    name: "Tanvir Hasan",
+                    role: "Service Provider",
+                    review:
+                      "I joined Shohojogi to find local work and got my first job shortly after. The platform is really straightforward.",
+                  },
+                  {
+                    name: "Maliha Karim",
+                    role: "Customer",
+                    review:
+                      "I needed an electrician urgently and didn't know who to call. Shohojogi helped me find someone without the usual hassle.",
+                  },
+                  {
+                    name: "Rafiul Islam",
+                    role: "Chauffeur",
+                    review:
+                      "The platform gives service providers a simple way to connect with people who actually need their skills.",
+                  },
+                  {
+                    name: "Faria Noor",
+                    role: "Customer",
+                    review:
+                      "What I like most is how easy everything feels. You post what you need and can start looking for the right person.",
+                  },
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex w-[300px] shrink-0 flex-col justify-between rounded-2xl border border-gray-800 bg-black p-6 md:w-[380px]"
+                  >
+                    {/* Stars */}
+                    <div>
+                      <div className="mb-4 flex gap-1 text-lg text-green-500">
+                        ★ ★ ★ ★ ★
+                      </div>
+
+                      <p className="text-sm leading-relaxed text-gray-300 md:text-base">
+                        "{item.review}"
+                      </p>
+                    </div>
+
+                    {/* User */}
+                    <div className="mt-6 flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-700 font-bold text-white">
+                        {item.name.charAt(0)}
+                      </div>
+
+                      <div>
+                        <p className="font-semibold text-white">{item.name}</p>
+
+                        <p className="text-xs text-gray-400">{item.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Animation */}
+          <style>
+            {`
+              @keyframes reviewScroll {
+                from {
+                  transform: translateX(0);
+                }
+                to {
+                  transform: translateX(-50%);
+                }
+              }
+            `}
+          </style>
+        </section>
+
+        {/* ================= CTA ================= */}
         <section className="px-3 pb-16 pt-10 md:px-6 md:pb-24">
           <div className="relative mx-auto flex min-h-[300px] max-w-7xl flex-col items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br from-green-950 via-green-800 to-green-700 px-6 py-16 text-center shadow-xl md:min-h-[360px]">
             <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-green-400/10 blur-3xl" />

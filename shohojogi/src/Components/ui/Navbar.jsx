@@ -12,6 +12,7 @@ function Navbar() {
     { name: "Why Shohojogi", link: "/why-shohojogi" },
     { name: "ProductPage (demo)", link: "/product" },
     { name: "taskPage (demo)", link: "/task" },
+    { name: "Admin", link: "/admin" },
   ];
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -84,7 +85,7 @@ function Navbar() {
               <button
                 onClick={() => setAccountOpen(!accountOpen)}
                 className="flex h-10 w-10 items-center justify-center rounded-full
-  bg-gradient-to-br from-green-400 via-emerald-500 to-green-600 border border-gray-300
+  bg-gradient-to-br from-green-600 to-green-800 outline-1 outline-green-400/40 border-green-400/70
   text-white font-semibold text-lg transition duration-200 hover:brightness-90
   "
                 title={user.name}
@@ -111,7 +112,7 @@ function Navbar() {
       "
                   />
 
-                  {/* Flyout */}
+                  {/* Flyout — clips the glow */}
                   <div
                     className="
         relative
@@ -128,8 +129,8 @@ function Navbar() {
                       className="
           pointer-events-none
           absolute
-          -bottom-20
-          -right-12
+          -bottom-16
+          -right-14
           h-36
           w-36
           rounded-full
