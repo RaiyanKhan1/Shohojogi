@@ -10,6 +10,10 @@ import Join from "./Pages/Join/Join.jsx";
 import ProductPage from "./Pages/Product/ProductPage.jsx";
 import WhyShohojogi from "./Pages/Why Shohojogi/WhyShohojogi.jsx";
 import TaskDetailsPage from "./Pages/TaskDetails/TaskDetailsPage.jsx";
+import PostTask from "./Pages/PostTask/PostTask.jsx";
+import ProductPage from "./Pages/Product/ProductPage.jsx";
+import WhyShohojogi from "./Pages/Why Shohojogi/WhyShohojogi.jsx";
+import TaskDetailsPage from "./Pages/TaskDetails/TaskDetailsPage.jsx";
 import AdminPage from "./Pages/Admin/AdminPage.jsx";
 
 function AppContent() {
@@ -29,6 +33,8 @@ function AppContent() {
         <Route path="/join" element={<Join />} />
         <Route path="/why-shohojogi" element={<WhyShohojogi />} />
         <Route path="/task" element={<TaskDetailsPage />} />
+        <Route path="/post-task" element={<PostTask />} />
+
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </>

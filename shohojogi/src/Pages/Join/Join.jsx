@@ -11,56 +11,90 @@ import "./Join.css";
 function Join() {
   const [mode, setMode] = useState("choose");
   const [role, setRole] = useState("");
-  const navigate = useNavigate();//
- const [error, setError] = useState("");//
-const [loading, setLoading] = useState(false);//
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const openSignup = (selectedRole) => {
     setRole(selectedRole);
     setMode("signup");
   };
 
-   const handleSubmit = async (event) => {
-  event.preventDefault();
-  setError("");
-  setLoading(true);
+  const openLogin = () => {
+    setRole("worker");
+    setError("");
+    setMode("login");
+  };
 
-  const form = new FormData(event.target);
-  const isLogin = mode === "login";
+  const goBack = () => {
+    setMode("choose");
+    setRole("");
+    setError("");
+  };
 
-  
- const url = `${import.meta.env.VITE_API_URL}/${role}/${isLogin ? "login" : "signup"}`;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
 
+    const form = new FormData(event.currentTarget);
+    const isLogin = mode === "login";
+    const apiBase = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
 
-  const body = isLogin
-    ? {
-        email: form.get("email"),
-        password: form.get("password"),
+    if (!apiBase) {
+      setError("API URL is not configured.");
+      setLoading(false);
+      return;
+    }
+
+    const url = `${apiBase}/${role}/${isLogin ? "login" : "signup"}`;
+    const body = isLogin
+      ? {
+          email: form.get("email"),
+          password: form.get("password"),
+        }
+      : {
+          name: form.get("fullName"),
+          email: form.get("email"),
+          password: form.get("password"),
+        };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(body),
+      });
+
+      const responseText = await response.text();
+      let data = {};
+
+      if (responseText) {
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          data = {};
+        }
       }
-    : {
-        name: form.get("fullName"), 
-        email: form.get("email"),
-        password: form.get("password"),
-      };
 
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",      
-      body: JSON.stringify(body),
-    });
+      if (!response.ok) {
+        throw new Error(
+          data.error ||
+            data.message ||
+            `Unable to ${isLogin ? "log in" : "sign up"} (HTTP ${response.status}).`
+        );
+      }
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error);
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
 
-    localStorage.setItem("user", JSON.stringify(data.user));
-
-    window.location.href = "/";
-  } catch (err) {
-    setError(err.message || "Something went wrong");
-    setLoading(false);
-  }
-};
+      window.location.href = "/";
+    } catch (err) {
+      setError(err.message || "Unable to connect to the server.");
+      setLoading(false);
+    }
+  };
   if (mode === "choose") {
     return (
       <main className="join-page">
@@ -98,7 +132,7 @@ const [loading, setLoading] = useState(false);//
             <button
               className="role-card"
               type="button"
-              onClick={() => openSignup("Worker")}//new
+              onClick={() => openSignup("worker")}
             >
               <span className="role-visual">
                 <BriefcaseBusiness
@@ -122,7 +156,7 @@ const [loading, setLoading] = useState(false);//
             Already have an account?{" "}
             <button
               type="button"
-              onClick={() => setMode("login")}
+              onClick={openLogin}
             >
               Log in
             </button>
@@ -139,7 +173,7 @@ const [loading, setLoading] = useState(false);//
         <button
           className="back-button"
           type="button"
-          onClick={() => setMode("choose")}
+          onClick={goBack}
         >
           <ArrowLeft size={18} />
           Back
@@ -156,6 +190,34 @@ const [loading, setLoading] = useState(false);//
             ? "Welcome back! Enter your details."
             : "Create your account to get started."}
         </p>
+
+        {mode === "login" && (
+          <div className="login-role-selector" role="group" aria-label="Log in as">
+          
+            <button
+              className={`login-role-option ${role === "client" ? "active" : ""}`}
+              type="button"
+              aria-pressed={role === "client"}
+              onClick={() => {
+                setRole("client");
+                setError("");
+              }}
+            >
+              Client
+            </button>
+             <button
+              className={`login-role-option ${role === "worker" ? "active" : ""}`}
+              type="button"
+              aria-pressed={role === "worker"}
+              onClick={() => {
+                setRole("worker");
+                setError("");
+              }}
+            >
+              Shohojogi
+            </button>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           {mode === "signup" && (
