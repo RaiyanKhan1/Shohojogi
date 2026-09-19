@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Wallet, CalendarDays } from 'lucide-react'
 import './JobList.css'
 
 function JobCard({ job }) {
@@ -18,6 +19,46 @@ function JobCard({ job }) {
 
       <p className="job-desc">{job.description}</p>
 
+      {(job.budget != null || job.deadline) && (
+        <div className="flex flex-wrap items-center gap-5">
+          {job.budget != null && (
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-50 text-green-700">
+                <Wallet size={15} />
+              </span>
+
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
+                  Budget
+                </p>
+
+                <p className="text-sm font-semibold text-gray-800">
+                  ৳{job.budget.toLocaleString()}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {job.deadline && (
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-50 text-green-700">
+                <CalendarDays size={15} />
+              </span>
+
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
+                  Deadline
+                </p>
+
+                <p className="text-sm font-semibold text-gray-800">
+                  {job.deadline}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {job.tags?.length > 0 && (
         <div className="job-tags">
           {job.tags.map((tag) => (
@@ -36,12 +77,12 @@ function JobList({ title, jobs }) {
 
   const types = ['All', ...new Set(jobs.map((j) => j.type))]
 
-  const filtered = jobs.filter((j) => type === 'All' || j.type === type)
+  // The dropdown is a placeholder for now; filtering is not wired up yet.
 
   return (
     <section className="job-list">
       <div className="job-list-head">
-        <h2>{title}: {filtered.length} tasks found</h2>
+        <h2>{title}: {jobs.length} tasks found</h2>
         <select
           className="job-type-filter"
           value={type}
@@ -54,11 +95,11 @@ function JobList({ title, jobs }) {
         </select>
       </div>
 
-      {filtered.length === 0 ? (
-        <p className="empty-state">No tasks match this filter. Try a different type.</p>
+      {jobs.length === 0 ? (
+        <p className="empty-state">No tasks posted yet. Check back soon.</p>
       ) : (
         <div className="job-grid">
-          {filtered.map((job) => (
+          {jobs.map((job) => (
             <JobCard job={job} key={job.id} />
           ))}
         </div>
