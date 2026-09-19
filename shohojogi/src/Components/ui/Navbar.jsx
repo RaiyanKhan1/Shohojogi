@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { InteractiveHoverButton } from "./interactive-hover-button";
 import { LeafyGreen } from "lucide-react";
-import { Menu, X, Settings, LogOut } from "lucide-react";
+import { Menu, X, Settings, LogOut, BriefcaseBusiness } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -146,6 +146,21 @@ function Navbar() {
                         {user.name}
                       </p>
                     </div>
+                    {/* Post — workers only */}
+                    {user.role === "client" && (
+                      <button
+                        onClick={() => {
+                          setAccountOpen(false);
+                          navigate("/post-task");
+                        }}
+                        className="flex w-full items-center gap-3 rounded-xl 
+               px-3 py-2.5 text-sm text-gray-700 
+               hover:bg-gray-100 transition"
+                      >
+                        <BriefcaseBusiness size={18} />
+                        <span>Create Listing</span>
+                      </button>
+                    )}
 
                     {/* Settings */}
                     <button
