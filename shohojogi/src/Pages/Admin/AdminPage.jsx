@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+
 import {
   Search,
   BriefcaseBusiness,
@@ -12,155 +13,117 @@ import {
 import AdminPanel from "../../Components/ui/AdminPanel";
 import JobCard from "../../Components/ui/JobCard";
 
-const initialJobs = [
-  {
-    id: 1,
-    title: "Need a Plumber for Kitchen Sink",
-    details:
-      "Looking for an experienced plumber to fix a leaking kitchen sink and replace the damaged pipe.",
-    client: "Rahim Ahmed",
-    location: "Dhanmondi, Dhaka",
-    budget: "৳1,500",
-    deadline: "Sep 20, 2026",
-    tags: ["NID required", "Location verified"],
-    requirements: ["2+ years experience", "Own tools", "Available this week"],
-    posted: "2 hours ago",
-    status: "pending",
-  },
+/*
+|--------------------------------------------------------------------------
+| API
+|--------------------------------------------------------------------------
+*/
 
-  {
-    id: 2,
-    title: "House Cleaning Service",
-    details:
-      "Need someone for a complete apartment cleaning including bedrooms, kitchen, bathrooms and balcony.",
-    client: "Nusrat Jahan",
-    location: "Uttara, Dhaka",
-    budget: "৳2,000",
-    deadline: "Sep 21, 2026",
-    tags: ["NID required", "Location verified"],
-    requirements: [
-      "Professional experience",
-      "Bring cleaning supplies",
-      "Available morning",
-    ],
-    posted: "4 hours ago",
-    status: "approved",
-  },
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 
-  {
-    id: 3,
-    title: "Math Tutor for University Student",
-    details:
-      "Looking for a tutor who can help with calculus and differential equations twice a week.",
-    client: "Tanvir Hasan",
-    location: "Mirpur, Dhaka",
-    budget: "৳3,000/month",
-    deadline: "Sep 25, 2026",
-    tags: ["CV required", "NID required", "Location verified"],
-    requirements: [
-      "Strong mathematics background",
-      "University-level experience",
-      "2 sessions per week",
-    ],
-    posted: "6 hours ago",
-    status: "pending",
-  },
+const ADMIN_API = `${API_URL.replace(/\/+$/, "")}/admin`;
 
-  {
-    id: 4,
-    title: "Electrical Wiring Repair",
-    details:
-      "Need an electrician to inspect and repair faulty wiring in several rooms of a residential apartment.",
-    client: "Sakib Rahman",
-    location: "Banani, Dhaka",
-    budget: "৳2,500",
-    deadline: "Sep 22, 2026",
-    tags: ["Police verification required", "NID required", "Location verified"],
-    requirements: [
-      "Licensed electrician",
-      "Own equipment",
-      "Safety gear required",
-    ],
-    posted: "8 hours ago",
-    status: "rejected",
-  },
+/*
+|--------------------------------------------------------------------------
+| Convert backend Task -> JobCard format
+|--------------------------------------------------------------------------
+*/
 
-  {
-    id: 5,
-    title: "Personal Driver Needed",
-    details:
-      "Looking for a reliable driver for regular city travel during weekdays.",
-    client: "Farhan Karim",
-    location: "Gulshan, Dhaka",
-    budget: "৳18,000/month",
-    deadline: "Sep 23, 2026",
-    tags: ["Police verification required", "NID required", "Location verified"],
-    requirements: [
-      "Valid driving license",
-      "3+ years driving experience",
-      "Good knowledge of Dhaka",
-    ],
-    posted: "1 day ago",
-    status: "pending",
-  },
+function mapTaskToJob(task) {
+  return {
+    id: task._id,
 
-  {
-    id: 6,
-    title: "AC Servicing Required",
-    details:
-      "Need professional servicing for two split AC units. One unit is not cooling properly.",
-    client: "Imran Chowdhury",
-    location: "Mohammadpur, Dhaka",
-    budget: "৳1,800",
-    deadline: "Sep 20, 2026",
-    tags: ["CV required", "NID required", "Location verified"],
-    requirements: [
-      "AC servicing experience",
-      "Own tools",
-      "Same-day availability preferred",
-    ],
-    posted: "1 day ago",
-    status: "approved",
-  },
+    title: task.taskName,
 
-  {
-    id: 7,
-    title: "Security Guard for Office",
-    details:
-      "Looking for a responsible security guard for a small office building.",
-    client: "Mahmud Hasan",
-    location: "Motijheel, Dhaka",
-    budget: "৳12,000/month",
-    deadline: "Sep 24, 2026",
-    tags: ["Police verification required", "NID required", "Location verified"],
-    requirements: [
-      "Previous security experience",
-      "Professional behavior",
-      "Night shift availability",
-    ],
-    posted: "2 days ago",
-    status: "pending",
-  },
+    details: task.details || "",
 
-  {
-    id: 8,
-    title: "Furniture Assembly",
-    details:
-      "Need help assembling a wardrobe, study table and several shelves.",
-    client: "Ayesha Rahman",
-    location: "Bashundhara, Dhaka",
-    budget: "৳1,200",
-    deadline: "Sep 22, 2026",
-    tags: ["NID required", "Location verified"],
-    requirements: [
-      "Furniture assembly experience",
-      "Bring basic tools",
-      "Careful handling",
-    ],
-    posted: "2 days ago",
-    status: "approved",
-  },
-];
+    client: task.postedBy?.name || "Unknown user",
+
+    clientEmail: task.postedBy?.email || "",
+
+    location: task.location || "Not specified",
+
+    budget:
+      task.budget !== undefined && task.budget !== null
+        ? `৳${Number(task.budget).toLocaleString()}`
+        : "Not specified",
+
+    deadline: task.deadline
+      ? new Date(task.deadline).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        })
+      : "No deadline",
+
+    tags: Array.isArray(task.tags) ? task.tags : [],
+
+    requirements: Array.isArray(task.requirements) ? task.requirements : [],
+
+    posted: task.createdAt ? getRelativeTime(task.createdAt) : "Recently",
+
+    // New backend status system
+    status: task.status || "pending",
+
+    image: task.taskImage?.url || null,
+
+    taskImage: task.taskImage || null,
+
+    // Keep original backend task available
+    rawTask: task,
+  };
+}
+
+/*
+|--------------------------------------------------------------------------
+| Relative time
+|--------------------------------------------------------------------------
+*/
+
+function getRelativeTime(dateValue) {
+  const date = new Date(dateValue);
+
+  if (Number.isNaN(date.getTime())) {
+    return "Recently";
+  }
+
+  const now = new Date();
+  const difference = Math.floor((now - date) / 1000);
+
+  if (difference < 60) {
+    return "Just now";
+  }
+
+  const minutes = Math.floor(difference / 60);
+
+  if (minutes < 60) {
+    return `${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+
+  if (hours < 24) {
+    return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+
+  if (days < 7) {
+    return `${days} ${days === 1 ? "day" : "days"} ago`;
+  }
+
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+/*
+|--------------------------------------------------------------------------
+| Stat Card
+|--------------------------------------------------------------------------
+*/
 
 function StatCard({ icon: Icon, label, value, description }) {
   return (
@@ -185,6 +148,12 @@ function StatCard({ icon: Icon, label, value, description }) {
     </div>
   );
 }
+
+/*
+|--------------------------------------------------------------------------
+| Tab Button
+|--------------------------------------------------------------------------
+*/
 
 function TabButton({ active, onClick, label, count }) {
   return (
@@ -212,6 +181,12 @@ function TabButton({ active, onClick, label, count }) {
   );
 }
 
+/*
+|--------------------------------------------------------------------------
+| Empty State
+|--------------------------------------------------------------------------
+*/
+
 function EmptyState({ tab }) {
   return (
     <div className="rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-16 text-center">
@@ -231,15 +206,79 @@ function EmptyState({ tab }) {
   );
 }
 
+/*
+|--------------------------------------------------------------------------
+| Admin Page
+|--------------------------------------------------------------------------
+*/
+
 function AdminPage() {
-  const [jobs, setJobs] = useState(initialJobs);
+  const [jobs, setJobs] = useState([]);
+
   const [activeTab, setActiveTab] = useState("pending");
+
   const [search, setSearch] = useState("");
+
   const [openFlyoutId, setOpenFlyoutId] = useState(null);
 
   const [activeSection, setActiveSection] = useState("dashboard");
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const [loading, setLoading] = useState(true);
+
+  const [error, setError] = useState("");
+
+  const [actionLoadingId, setActionLoadingId] = useState(null);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Fetch Tasks
+  |--------------------------------------------------------------------------
+  */
+
+  const fetchTasks = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await fetch(`${ADMIN_API}/tasks`, {
+        method: "GET",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.error || "Failed to load tasks.");
+      }
+
+      const mappedJobs = Array.isArray(data) ? data.map(mapTaskToJob) : [];
+
+      setJobs(mappedJobs);
+    } catch (err) {
+      console.error("Failed to fetch admin tasks:", err);
+
+      setError(err.message || "Something went wrong while loading jobs.");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Load tasks when AdminPage opens
+  |--------------------------------------------------------------------------
+  */
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Statistics
+  |--------------------------------------------------------------------------
+  */
 
   const stats = useMemo(() => {
     return {
@@ -252,6 +291,12 @@ function AdminPage() {
       rejected: jobs.filter((job) => job.status === "rejected").length,
     };
   }, [jobs]);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Search + tab filtering
+  |--------------------------------------------------------------------------
+  */
 
   const filteredJobs = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -271,6 +316,7 @@ function AdminPage() {
         job.title,
         job.details,
         job.client,
+        job.clientEmail,
         job.location,
         job.budget,
         job.deadline,
@@ -284,34 +330,82 @@ function AdminPage() {
     });
   }, [jobs, activeTab, search]);
 
-  const approveJob = (id) => {
-    setJobs((currentJobs) =>
-      currentJobs.map((job) =>
-        job.id === id
-          ? {
-              ...job,
-              status: "approved",
-            }
-          : job,
-      ),
-    );
+  /*
+  |--------------------------------------------------------------------------
+  | Change task status through backend
+  |--------------------------------------------------------------------------
+  */
 
-    setOpenFlyoutId(null);
+  const updateTaskStatus = async (id, status) => {
+    try {
+      setActionLoadingId(id);
+      setError("");
+
+      const response = await fetch(`${ADMIN_API}/tasks/${id}/approval`, {
+        method: "PATCH",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          status,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.error || `Failed to ${status} task.`);
+      }
+
+      if (data.task) {
+        const updatedJob = mapTaskToJob(data.task);
+
+        setJobs((currentJobs) =>
+          currentJobs.map((job) => (job.id === id ? updatedJob : job)),
+        );
+      } else {
+        setJobs((currentJobs) =>
+          currentJobs.map((job) =>
+            job.id === id
+              ? {
+                  ...job,
+                  status,
+                }
+              : job,
+          ),
+        );
+      }
+
+      setOpenFlyoutId(null);
+    } catch (err) {
+      console.error(`Failed to update task ${id}:`, err);
+
+      setError(err.message || `Failed to ${status} the task.`);
+    } finally {
+      setActionLoadingId(null);
+    }
   };
 
-  const rejectJob = (id) => {
-    setJobs((currentJobs) =>
-      currentJobs.map((job) =>
-        job.id === id
-          ? {
-              ...job,
-              status: "rejected",
-            }
-          : job,
-      ),
-    );
+  /*
+  |--------------------------------------------------------------------------
+  | Approve
+  |--------------------------------------------------------------------------
+  */
 
-    setOpenFlyoutId(null);
+  const approveJob = (id) => {
+    updateTaskStatus(id, "approved");
+  };
+
+  /*
+  |--------------------------------------------------------------------------
+  | Reject
+  |--------------------------------------------------------------------------
+  */
+
+  const rejectJob = (id) => {
+    updateTaskStatus(id, "rejected");
   };
 
   const tabLabels = {
@@ -323,6 +417,7 @@ function AdminPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Left Admin Panel */}
+
       <AdminPanel
         activeSection={activeSection}
         setActiveSection={setActiveSection}
@@ -332,8 +427,10 @@ function AdminPage() {
       />
 
       {/* Main */}
+
       <main className="min-h-screen lg:pl-[252px]">
         {/* Mobile top bar */}
+
         <div className="flex h-16 items-center border-b border-gray-200 bg-white px-4 lg:hidden">
           <button
             type="button"
@@ -351,6 +448,7 @@ function AdminPage() {
         {activeSection === "dashboard" ? (
           <>
             {/* Hero */}
+
             <section className="relative mx-3 mt-3 overflow-hidden rounded-3xl bg-green-800 sm:mx-5 sm:mt-5 lg:mx-7">
               <div className="absolute -right-20 -top-28 h-72 w-72 rounded-full bg-green-500/20 blur-2xl" />
 
@@ -430,8 +528,10 @@ function AdminPage() {
             </section>
 
             {/* Content */}
+
             <div className="mx-auto max-w-[1450px] px-3 pb-10 sm:px-5 lg:px-7">
               {/* Stats */}
+
               <section className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-4 xl:grid-cols-4">
                 <StatCard
                   icon={BriefcaseBusiness}
@@ -463,6 +563,7 @@ function AdminPage() {
               </section>
 
               {/* Header */}
+
               <section className="mt-9">
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                   <div>
@@ -480,6 +581,7 @@ function AdminPage() {
                   </div>
 
                   {/* Search */}
+
                   <div className="relative w-full lg:w-80">
                     <Search
                       size={18}
@@ -496,7 +598,24 @@ function AdminPage() {
                   </div>
                 </div>
 
+                {/* Error */}
+
+                {error && (
+                  <div className="mt-5 flex items-center justify-between gap-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    <span>{error}</span>
+
+                    <button
+                      type="button"
+                      onClick={fetchTasks}
+                      className="shrink-0 rounded-lg border border-red-200 bg-white px-3 py-1.5 text-xs font-semibold text-red-700 transition hover:bg-red-100"
+                    >
+                      Retry
+                    </button>
+                  </div>
+                )}
+
                 {/* Tabs */}
+
                 <div className="mt-6 flex w-full overflow-x-auto rounded-2xl border border-gray-200 bg-white p-1.5 shadow-sm lg:w-fit">
                   <TabButton
                     active={activeTab === "pending"}
@@ -531,8 +650,18 @@ function AdminPage() {
               </section>
 
               {/* Jobs */}
+
               <section className="mt-6">
-                {filteredJobs.length > 0 ? (
+                {loading ? (
+                  <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                    {[1, 2, 3].map((item) => (
+                      <div
+                        key={item}
+                        className="h-72 animate-pulse rounded-2xl border border-gray-200 bg-white"
+                      />
+                    ))}
+                  </div>
+                ) : filteredJobs.length > 0 ? (
                   <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
                     {filteredJobs.map((job) => (
                       <JobCard
@@ -542,6 +671,7 @@ function AdminPage() {
                         setOpenFlyoutId={setOpenFlyoutId}
                         onApprove={approveJob}
                         onReject={rejectJob}
+                        actionLoadingId={actionLoadingId}
                       />
                     ))}
                   </div>
@@ -553,6 +683,7 @@ function AdminPage() {
           </>
         ) : (
           /* Settings */
+
           <div className="mx-auto max-w-[1450px] px-3 py-6 sm:px-5 lg:px-7 lg:py-8">
             <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
               <div className="flex items-start gap-4">
