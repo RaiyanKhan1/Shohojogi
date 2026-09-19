@@ -112,8 +112,9 @@ function PostTask() {
       }
 
       setSuccess(
-        data.message ||
-          "Task posted successfully. It goes live once an admin approves it."
+        `${data.message || "Task posted successfully"} — it is ${
+          data.task?.status || "pending"
+        } until an admin reviews it.`
       );
       setTitle("");
       setLocation("");
