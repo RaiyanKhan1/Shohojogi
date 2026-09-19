@@ -25,6 +25,9 @@ function PostTask() {
   const [details, setDetails] = useState("");
   const [tags, setTags] = useState([]);
   const [requirements, setRequirements] = useState([""]);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const toggleTag = (id) => {
     setTags((selected) =>
@@ -48,22 +51,82 @@ function PostTask() {
     );
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setError("");
+    setSuccess("");
 
-    const task = {
-      title,
-      location,
-      budget,
-      deadline,
-      details,
-      tags: TAG_OPTIONS.filter((option) => tags.includes(option.id)).map(
-        (option) => option.label
-      ),
-      requirements: requirements.map((item) => item.trim()).filter(Boolean),
-    };
+    const apiBase = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
 
-    console.log("Task to post:", task);
+    if (!apiBase) {
+      setError("API URL is not configured.");
+      return;
+    }
+
+    const body = new FormData();
+    body.append("taskName", title);
+    body.append("location", location);
+    body.append("deadline", deadline);
+    body.append("budget", budget);
+    body.append("details", details);
+
+    TAG_OPTIONS.filter((option) => tags.includes(option.id)).forEach((option) =>
+      body.append("tags", option.label)
+    );
+
+    requirements
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .forEach((item) => body.append("requirements", item));
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${apiBase}/client/tasks`, {
+        method: "POST",
+        credentials: "include",
+        body,
+      });
+
+      const responseText = await response.text();
+      let data = {};
+
+      if (responseText) {
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          data = {};
+        }
+      }
+
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          throw new Error("Log in as a client to post a task.");
+        }
+
+        throw new Error(
+          data.error ||
+            data.message ||
+            `Unable to post this task (HTTP ${response.status}).`
+        );
+      }
+
+      setSuccess(
+        data.message ||
+          "Task posted successfully. It goes live once an admin approves it."
+      );
+      setTitle("");
+      setLocation("");
+      setBudget("");
+      setDeadline("");
+      setDetails("");
+      setTags([]);
+      setRequirements([""]);
+    } catch (err) {
+      setError(err.message || "Unable to connect to the server.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -211,8 +274,20 @@ function PostTask() {
           />
         </label>
 
-        <button className="pt-submit" type="submit">
-          Post this task
+        {error && (
+          <p className="pt-hint" role="alert" style={{ color: "#c94a4a" }}>
+            {error}
+          </p>
+        )}
+
+        {success && (
+          <p className="pt-hint" role="status" style={{ color: "#087b2c" }}>
+            {success}
+          </p>
+        )}
+
+        <button className="pt-submit" type="submit" disabled={loading}>
+          {loading ? "Posting..." : "Post this task"}
         </button>
       </form>
     </main>
