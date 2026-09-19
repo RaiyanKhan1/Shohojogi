@@ -14,7 +14,9 @@ export default function ApplyCard({ budget, applicants }) {
         <span className="td-apply-card__dot" />
         Open for applicants
       </div>
-      <p className="td-apply-card__sub">{applicants} people already applied</p>
+      {applicants != null && (
+        <p className="td-apply-card__sub">{applicants} people already applied</p>
+      )}
       <button
         onClick={() => setApplied(true)}
         disabled={applied}
