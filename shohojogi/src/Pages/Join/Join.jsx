@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";// new
+import { useNavigate } from "react-router-dom"; // new
 import {
   UserRoundSearch,
   BriefcaseBusiness,
@@ -9,6 +9,7 @@ import {
 import "./Join.css";
 
 function Join() {
+  const navigate = useNavigate();
   const [mode, setMode] = useState("choose");
   const [role, setRole] = useState("");
   const [error, setError] = useState("");
@@ -81,7 +82,7 @@ function Join() {
         throw new Error(
           data.error ||
             data.message ||
-            `Unable to ${isLogin ? "log in" : "sign up"} (HTTP ${response.status}).`
+            `Unable to ${isLogin ? "log in" : "sign up"} (HTTP ${response.status}).`,
         );
       }
 
@@ -89,7 +90,7 @@ function Join() {
         localStorage.setItem("user", JSON.stringify(data.user));
       }
 
-      window.location.href = "/";
+      navigate("/", { replace: true });
     } catch (err) {
       setError(err.message || "Unable to connect to the server.");
       setLoading(false);
@@ -101,22 +102,16 @@ function Join() {
         <section className="join-shell">
           <h1>Welcome to Shohojogi</h1>
 
-          <p className="join-subtitle">
-            Which describes you best?
-          </p>
+          <p className="join-subtitle">Which describes you best?</p>
 
           <div className="role-grid">
-       
             <button
               className="role-card"
               type="button"
               onClick={() => openSignup("client")}
             >
               <span className="role-visual">
-                <UserRoundSearch
-                  size={74}
-                  strokeWidth={1.6}
-                />
+                <UserRoundSearch size={74} strokeWidth={1.6} />
               </span>
 
               <span className="role-title">
@@ -124,9 +119,7 @@ function Join() {
                 <ArrowRight size={25} />
               </span>
 
-              <span className="role-description">
-                Post jobs and hire
-              </span>
+              <span className="role-description">Post jobs and hire</span>
             </button>
 
             <button
@@ -135,10 +128,7 @@ function Join() {
               onClick={() => openSignup("worker")}
             >
               <span className="role-visual">
-                <BriefcaseBusiness
-                  size={74}
-                  strokeWidth={1.6}
-                />
+                <BriefcaseBusiness size={74} strokeWidth={1.6} />
               </span>
 
               <span className="role-title">
@@ -146,18 +136,13 @@ function Join() {
                 <ArrowRight size={25} />
               </span>
 
-              <span className="role-description">
-                Work and get paid
-              </span>
+              <span className="role-description">Work and get paid</span>
             </button>
           </div>
 
           <p className="account-switch">
             Already have an account?{" "}
-            <button
-              type="button"
-              onClick={openLogin}
-            >
+            <button type="button" onClick={openLogin}>
               Log in
             </button>
           </p>
@@ -166,23 +151,16 @@ function Join() {
     );
   }
 
- 
   return (
     <main className="join-page">
       <section className="auth-card">
-        <button
-          className="back-button"
-          type="button"
-          onClick={goBack}
-        >
+        <button className="back-button" type="button" onClick={goBack}>
           <ArrowLeft size={18} />
           Back
         </button>
 
         <h1>
-          {mode === "login"
-            ? "Log in to Shohojogi"
-            : "Sign up for Shohojogi"}
+          {mode === "login" ? "Log in to Shohojogi" : "Sign up for Shohojogi"}
         </h1>
 
         <p>
@@ -192,8 +170,11 @@ function Join() {
         </p>
 
         {mode === "login" && (
-          <div className="login-role-selector" role="group" aria-label="Log in as">
-          
+          <div
+            className="login-role-selector"
+            role="group"
+            aria-label="Log in as"
+          >
             <button
               className={`login-role-option ${role === "client" ? "active" : ""}`}
               type="button"
@@ -205,7 +186,7 @@ function Join() {
             >
               Client
             </button>
-             <button
+            <button
               className={`login-role-option ${role === "worker" ? "active" : ""}`}
               type="button"
               aria-pressed={role === "worker"}
@@ -222,11 +203,7 @@ function Join() {
         <form onSubmit={handleSubmit}>
           {mode === "signup" && (
             <>
-              <input
-                type="hidden"
-                name="role"
-                value={role}
-              />
+              <input type="hidden" name="role" value={role} />
 
               <input
                 type="text"
@@ -254,21 +231,22 @@ function Join() {
             placeholder="Password"
             aria-label="Password"
             autoComplete={
-              mode === "login"
-                ? "current-password"
-                : "new-password"
+              mode === "login" ? "current-password" : "new-password"
             }
             minLength={6}
             required
           />
 
-           {error && <p className="form-error">{error}</p>}
+          {error && <p className="form-error">{error}</p>}
 
-<button className="submit-button" type="submit" disabled={loading}>
-  {loading ? "Please wait..." : mode === "login" ? "Log in" : "Create account"}
-</button>
+          <button className="submit-button" type="submit" disabled={loading}>
+            {loading
+              ? "Please wait..."
+              : mode === "login"
+                ? "Log in"
+                : "Create account"}
+          </button>
         </form>
- 
       </section>
     </main>
   );
