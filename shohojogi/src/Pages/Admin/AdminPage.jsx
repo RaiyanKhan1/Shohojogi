@@ -13,22 +13,12 @@ import {
 import AdminPanel from "../../Components/ui/AdminPanel";
 import JobCard from "../../Components/ui/JobCard";
 
-/*
-|--------------------------------------------------------------------------
-| API
-|--------------------------------------------------------------------------
-*/
-
+// API
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 
 const ADMIN_API = `${API_URL.replace(/\/+$/, "")}/admin`;
 
-/*
-|--------------------------------------------------------------------------
-| Convert backend Task -> JobCard format
-|--------------------------------------------------------------------------
-*/
-
+// Convert backend Task -> JobCard format
 function mapTaskToJob(task) {
   return {
     id: task._id,
@@ -74,12 +64,7 @@ function mapTaskToJob(task) {
   };
 }
 
-/*
-|--------------------------------------------------------------------------
-| Relative time
-|--------------------------------------------------------------------------
-*/
-
+// Relative time
 function getRelativeTime(dateValue) {
   const date = new Date(dateValue);
 
@@ -119,12 +104,7 @@ function getRelativeTime(dateValue) {
   });
 }
 
-/*
-|--------------------------------------------------------------------------
-| Stat Card
-|--------------------------------------------------------------------------
-*/
-
+// Stat Card
 function StatCard({ icon: Icon, label, value, description }) {
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
@@ -149,18 +129,14 @@ function StatCard({ icon: Icon, label, value, description }) {
   );
 }
 
-/*
-|--------------------------------------------------------------------------
-| Tab Button
-|--------------------------------------------------------------------------
-*/
 
+// Tab Button
 function TabButton({ active, onClick, label, count }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`group flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
+      className={`group flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold cursor-pointer transition-all duration-200 ${
         active
           ? "bg-green-700 text-white shadow-sm"
           : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
@@ -181,12 +157,7 @@ function TabButton({ active, onClick, label, count }) {
   );
 }
 
-/*
-|--------------------------------------------------------------------------
-| Empty State
-|--------------------------------------------------------------------------
-*/
-
+// Empty State
 function EmptyState({ tab }) {
   return (
     <div className="rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-16 text-center">
@@ -206,12 +177,7 @@ function EmptyState({ tab }) {
   );
 }
 
-/*
-|--------------------------------------------------------------------------
-| Admin Page
-|--------------------------------------------------------------------------
-*/
-
+// Admin Page
 function AdminPage() {
   const [jobs, setJobs] = useState([]);
 
@@ -231,12 +197,9 @@ function AdminPage() {
 
   const [actionLoadingId, setActionLoadingId] = useState(null);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Fetch Tasks
-  |--------------------------------------------------------------------------
-  */
 
+
+  // Fetch Tasks
   const fetchTasks = useCallback(async () => {
     try {
       setLoading(true);
@@ -264,22 +227,13 @@ function AdminPage() {
     }
   }, []);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Load tasks when AdminPage opens
-  |--------------------------------------------------------------------------
-  */
 
+  //Load tasks when AdminPage opens
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks]);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Statistics
-  |--------------------------------------------------------------------------
-  */
-
+ // Statistics
   const stats = useMemo(() => {
     return {
       total: jobs.length,
@@ -292,11 +246,7 @@ function AdminPage() {
     };
   }, [jobs]);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Search + tab filtering
-  |--------------------------------------------------------------------------
-  */
+  // Search + tab filtering
 
   const filteredJobs = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -330,12 +280,7 @@ function AdminPage() {
     });
   }, [jobs, activeTab, search]);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Change task status through backend
-  |--------------------------------------------------------------------------
-  */
-
+// Change task status through backend
   const updateTaskStatus = async (id, status) => {
     try {
       setActionLoadingId(id);
@@ -388,22 +333,12 @@ function AdminPage() {
     }
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Approve
-  |--------------------------------------------------------------------------
-  */
-
+  // Approve
   const approveJob = (id) => {
     updateTaskStatus(id, "approved");
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Reject
-  |--------------------------------------------------------------------------
-  */
-
+  // Reject
   const rejectJob = (id) => {
     updateTaskStatus(id, "rejected");
   };
@@ -416,8 +351,8 @@ function AdminPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Left Admin Panel */}
 
+      {/* Admin Panel */}
       <AdminPanel
         activeSection={activeSection}
         setActiveSection={setActiveSection}
@@ -507,19 +442,6 @@ function AdminPage() {
                     {stats.total}
                   </p>
 
-                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
-                    <div
-                      className="h-full rounded-full bg-white/70 transition-all"
-                      style={{
-                        width: `${
-                          stats.total
-                            ? Math.max(8, (stats.approved / stats.total) * 100)
-                            : 0
-                        }%`,
-                      }}
-                    />
-                  </div>
-
                   <p className="mt-2 text-[11px] text-green-200">
                     {stats.approved} currently approved
                   </p>
@@ -607,7 +529,7 @@ function AdminPage() {
                     <button
                       type="button"
                       onClick={fetchTasks}
-                      className="shrink-0 rounded-lg border border-red-200 bg-white px-3 py-1.5 text-xs font-semibold text-red-700 transition hover:bg-red-100"
+                      className="shrink-0 rounded-lg border border-red-200 bg-white px-3 py-1.5 text-xs font-semibold cursor-pointer text-red-700 transition hover:bg-red-100"
                     >
                       Retry
                     </button>

@@ -30,17 +30,11 @@ function AdminPanel({
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* =========================
-            INNER GREEN GLOW
-        ========================== */}
-
-        {/* Middle subtle glow */}
+        {/* glow */}
         <div
           className="pointer-events-none absolute -right-24 top-[38%] h-56 w-56 rounded-full bg-green-500/10 blur-[75px]"
           aria-hidden="true"
         />
-
-        {/* Bottom glow */}
         <div
           className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-green-400/15 blur-[80px]"
           aria-hidden="true"
@@ -95,7 +89,7 @@ function AdminPanel({
               setActiveSection("dashboard");
               setSidebarOpen(false);
             }}
-            className={`flex w-full items-center justify-between rounded-xl px-3.5 py-3 text-sm font-semibold transition ${
+            className={`flex w-full items-center justify-between rounded-xl px-3.5 py-3 text-sm font-semibold cursor-pointer transition ${
               activeSection === "dashboard"
                 ? "bg-green-700 text-white shadow-sm"
                 : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -124,7 +118,7 @@ function AdminPanel({
               setActiveSection("settings");
               setSidebarOpen(false);
             }}
-            className={`mt-1.5 flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold transition ${
+            className={`mt-1.5 flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold cursor-pointer transition ${
               activeSection === "settings"
                 ? "bg-green-700 text-white shadow-sm"
                 : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -140,7 +134,7 @@ function AdminPanel({
           <button
             type="button"
             onClick={() => console.log("Logout")}
-            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold text-gray-500 transition hover:bg-rose-700 hover:text-white"
+            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold cursor-pointer text-gray-500 transition hover:bg-rose-700 hover:text-white"
           >
             <LogOut size={18} />
             Logout

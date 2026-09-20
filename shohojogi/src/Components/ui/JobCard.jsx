@@ -331,7 +331,7 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
               <button
                 type="button"
                 onClick={() => onApprove(job.id)}
-                className="flex h-9 items-center justify-center gap-1.5 rounded-xl border border-green-500 bg-green-600 text-xs font-semibold text-white transition-colors duration-200 hover:bg-green-700"
+                className="flex h-9 items-center justify-center gap-1.5 rounded-xl border border-green-500 bg-green-600 text-xs font-semibold text-white cursor-pointer transition-colors duration-200 hover:bg-green-700"
               >
                 <Check size={15} />
                 Approve
@@ -340,7 +340,7 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
               <button
                 type="button"
                 onClick={() => onReject(job.id)}
-                className="flex h-9 items-center justify-center gap-1.5 rounded-xl border bg-rose-700 border-rose-600 text-xs font-semibold text-white transition-colors duration-200 hover:bg-rose-600"
+                className="flex h-9 items-center justify-center gap-1.5 rounded-xl border bg-rose-700 border-rose-600 text-xs font-semibold text-white cursor-pointer transition-colors duration-200 hover:bg-rose-600"
               >
                 <X size={15} />
                 Reject
