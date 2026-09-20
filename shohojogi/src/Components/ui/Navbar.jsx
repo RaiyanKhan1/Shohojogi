@@ -10,8 +10,7 @@ function Navbar() {
     { name: "Find Work", link: "/find-work" },
     { name: "Hire People", link: "/collections" },
     { name: "Why Shohojogi", link: "/why-shohojogi" },
-    { name: "ProductPage (demo)", link: "/product" },
-    { name: "taskPage (demo)", link: "/task" },
+
     { name: "Admin", link: "/admin" },
   ];
   const navigate = useNavigate();

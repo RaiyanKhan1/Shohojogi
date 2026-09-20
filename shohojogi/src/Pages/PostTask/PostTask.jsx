@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Plus,
   X,
@@ -9,6 +9,10 @@ import {
   MapPinCheck,
 } from "lucide-react";
 import "./PostTask.css";
+
+// Mirrors the server's multer config: JPEG/PNG/WebP, one file, 2 MB.
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
 
 const TAG_OPTIONS = [
   { id: "police", label: "Police verification required", icon: ShieldCheck },
@@ -28,6 +32,46 @@ function PostTask() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
+  const imageInputRef = useRef(null);
+
+  const clearImage = () => {
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+
+    setImage(null);
+    setImagePreview("");
+
+    if (imageInputRef.current) imageInputRef.current.value = "";
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files?.[0];
+
+    setError("");
+
+    if (!file) {
+      clearImage();
+      return;
+    }
+
+    if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      setError("Only JPEG, PNG and WebP images are allowed.");
+      clearImage();
+      return;
+    }
+
+    if (file.size > MAX_IMAGE_BYTES) {
+      setError("That image is larger than 2 MB. Pick a smaller one.");
+      clearImage();
+      return;
+    }
+
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+
+    setImage(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
 
   const toggleTag = (id) => {
     setTags((selected) =>
@@ -79,6 +123,8 @@ function PostTask() {
       .filter(Boolean)
       .forEach((item) => body.append("requirements", item));
 
+    if (image) body.append("taskImage", image);
+
     setLoading(true);
 
     try {
@@ -123,6 +169,7 @@ function PostTask() {
       setDetails("");
       setTags([]);
       setRequirements([""]);
+      clearImage();
     } catch (err) {
       setError(err.message || "Unable to connect to the server.");
     } finally {
@@ -274,6 +321,43 @@ function PostTask() {
             required
           />
         </label>
+
+        <div className="pt-field">
+          <span className="pt-label">Task image</span>
+          <p className="pt-hint">Optional. JPEG, PNG or WebP, up to 2 MB.</p>
+
+          <input
+            ref={imageInputRef}
+            type="file"
+            name="taskImage"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={handleImageChange}
+            className="w-full cursor-pointer rounded-lg border border-dashed border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-600 transition-colors hover:border-green-400 file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-green-50 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-green-700"
+          />
+
+          {imagePreview && (
+            <div className="flex items-center gap-3">
+              <img
+                src={imagePreview}
+                alt="Selected task"
+                className="h-16 w-16 shrink-0 rounded-lg object-cover"
+              />
+
+              <span className="min-w-0 flex-1 truncate text-sm text-gray-600">
+                {image.name}
+              </span>
+
+              <button
+                className="pt-remove"
+                type="button"
+                onClick={clearImage}
+                aria-label="Remove image"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          )}
+        </div>
 
         {error && (
           <p className="pt-hint" role="alert" style={{ color: "#c94a4a" }}>

@@ -44,9 +44,18 @@ function AppContent() {
         <Route path="/collections" element={<Collections />} />
         <Route path="/find-work" element={<FindWork />} />
         <Route path="/product" element={<ProductPage />} />
-        <Route path="/join" element={<PublicOnly> <Join /> </PublicOnly>}/>
+        <Route
+          path="/join"
+          element={
+            <PublicOnly>
+              {" "}
+              <Join />{" "}
+            </PublicOnly>
+          }
+        />
         <Route path="/why-shohojogi" element={<WhyShohojogi />} />
-        <Route path="/task" element={<TaskDetailsPage />} />
+        <Route path="/task/:id" element={<TaskDetailsPage />} />
+        <Route path="/task" element={<Navigate to="/find-work" replace />} />
         <Route path="/post-task" element={<PostTask />} />
         <Route path="/post-service" element={<PostService />} />
         <Route path="/admin" element={<AdminPage />} />

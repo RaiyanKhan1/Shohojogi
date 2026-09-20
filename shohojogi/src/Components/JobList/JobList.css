@@ -191,6 +191,8 @@
 
 .job-see-more {
   align-self: flex-start;
+  display: inline-block;
+  text-decoration: none;
   font: inherit;
   font-size: 15px;
   font-weight: 600;
