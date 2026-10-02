@@ -20,6 +20,7 @@ import PostTask from "./Pages/PostTask/PostTask.jsx";
 import PostService from "./Pages/PostTask/PostService.jsx";
 import AdminPage from "./Pages/Admin/AdminPage.jsx";
 import ClientApplicationsPage from "./Pages/Client/ClientApplicationsPage.jsx";
+import WorkerVerificationPage from "./Pages/Worker/WorkerVerificationPage.jsx";
 
 function PublicOnly({ children }) {
   const stored = localStorage.getItem("user");
@@ -62,6 +63,10 @@ function AppContent() {
         <Route
           path="/client/applications"
           element={<ClientApplicationsPage />}
+        />
+        <Route
+          path="/worker/verification"
+          element={<WorkerVerificationPage />}
         />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
