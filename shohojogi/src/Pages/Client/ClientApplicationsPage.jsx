@@ -117,6 +117,43 @@ export default function ClientApplicationsPage() {
         }
     };
 
+    // Accepting a worker requires paying through SSLCommerz first.
+    const startPayment = async (applicationId) => {
+        if (!API_URL) {
+            setError("API URL is not configured.");
+            return;
+        }
+
+        setUpdatingId(applicationId);
+        setError("");
+
+        try {
+            const response = await fetch(
+                `${API_URL}/payment/init/${applicationId}`,
+                {
+                    method: "POST",
+                    credentials: "include",
+                },
+            );
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok || !data.url) {
+                throw new Error(
+                    data.error || "Unable to start payment.",
+                );
+            }
+
+            // Go to the SSLCommerz payment page.
+            window.location.href = data.url;
+        } catch (err) {
+            setError(
+                err.message || "Unable to start payment.",
+            );
+            setUpdatingId(null);
+        }
+    };
+
     const stats = useMemo(() => {
         const total = applications.length;
 
@@ -310,10 +347,7 @@ export default function ClientApplicationsPage() {
                                             updatingId === application._id
                                         }
                                         onAccept={() =>
-                                            updateStatus(
-                                                application._id,
-                                                "accepted",
-                                            )
+                                            startPayment(application._id)
                                         }
                                         onReject={() =>
                                             updateStatus(
