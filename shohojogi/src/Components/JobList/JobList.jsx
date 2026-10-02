@@ -90,35 +90,55 @@ function JobCard({ job }) {
 function JobList({ title, jobs }) {
   const [type, setType] = useState("All");
 
-  const types = ["All", ...new Set(jobs.map((j) => j.type))];
+  // job.type holds the task location. Compare without case or extra spaces
+  // so "Pabna" and "pabna " count as the same place.
+  const normalize = (value) => (value ?? "").trim().toLowerCase();
 
-  // The dropdown is a placeholder for now; filtering is not wired up yet.
+  const types = [
+    "All",
+    ...new Map(
+      jobs
+        .filter((j) => normalize(j.type))
+        .map((j) => [normalize(j.type), j.type.trim()]),
+    ).values(),
+  ];
+
+  // Fall back to "All" if the chosen location is no longer in the list
+  // (for example after switching category).
+  const activeType = types.some((t) => normalize(t) === normalize(type))
+    ? type
+    : "All";
+
+  const visibleJobs =
+    activeType === "All"
+      ? jobs
+      : jobs.filter((j) => normalize(j.type) === normalize(activeType));
 
   return (
     <section className="job-list">
       <div className="job-list-head">
         <h2>
-          {title}: {jobs.length} tasks found
+          {title}: {visibleJobs.length} tasks found
         </h2>
         <select
           className="job-type-filter"
-          value={type}
+          value={activeType}
           onChange={(e) => setType(e.target.value)}
-          aria-label="Filter by task type"
+          aria-label="Filter by location"
         >
           {types.map((t) => (
             <option key={t} value={t}>
-              {t}
+              {t === "All" ? "All locations" : t}
             </option>
           ))}
         </select>
       </div>
 
-      {jobs.length === 0 ? (
+      {visibleJobs.length === 0 ? (
         <p className="empty-state">No tasks posted yet. Check back soon.</p>
       ) : (
         <div className="job-grid">
-          {jobs.map((job) => (
+          {visibleJobs.map((job) => (
             <JobCard job={job} key={job.id} />
           ))}
         </div>
