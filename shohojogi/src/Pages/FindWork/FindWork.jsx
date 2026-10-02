@@ -17,7 +17,7 @@ function FindWork() {
       try {
         if (!apiBase) throw new Error('API URL is not configured.')
 
-        const response = await fetch(`${apiBase}/admin/tasks?status=approved`, {
+        const response = await fetch(`${apiBase}/tasks`, {
           credentials: 'include',
         })
 
@@ -35,8 +35,8 @@ function FindWork() {
         if (!response.ok) {
           throw new Error(
             data.error ||
-              data.message ||
-              `Unable to load tasks (HTTP ${response.status}).`
+            data.message ||
+            `Unable to load tasks (HTTP ${response.status}).`
           )
         }
 

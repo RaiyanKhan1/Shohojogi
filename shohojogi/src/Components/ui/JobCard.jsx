@@ -14,45 +14,23 @@ import {
   Info,
 } from "lucide-react";
 
-function StatusBadge({ status }) {
-  const config = {
-    pending: {
-      label: "Pending",
-      icon: Clock3,
-      className: "bg-amber-50 text-amber-700 border-amber-100",
-    },
-    approved: {
-      label: "Approved",
-      icon: CheckCircle2,
-      className: "bg-green-50 text-green-700 border-green-100",
-    },
-    rejected: {
-      label: "Rejected",
-      icon: XCircle,
-      className: "bg-red-50 text-red-600 border-red-100",
-    },
-  };
+import StatusBadge from "./StatusBadge";
 
-  const item = config[status];
-  const Icon = item.icon;
-
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold ${item.className}`}
-    >
-      <Icon size={12} />
-      {item.label}
-    </span>
-  );
-}
-
-function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
+function JobCard({
+  job,
+  openFlyoutId,
+  setOpenFlyoutId,
+  onApprove,
+  onReject,
+}) {
   const detailsOpen = openFlyoutId === `details-${job.id}`;
   const tagsOpen = openFlyoutId === `tags-${job.id}`;
-  const requirementsOpen = openFlyoutId === `requirements-${job.id}`;
+  const requirementsOpen =
+    openFlyoutId === `requirements-${job.id}`;
 
   // Keep the entire card above neighboring cards while a flyout is open.
-  const flyoutOpen = detailsOpen || tagsOpen || requirementsOpen;
+  const flyoutOpen =
+    detailsOpen || tagsOpen || requirementsOpen;
 
   const statusDot =
     job.status === "pending"
@@ -63,16 +41,17 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
 
   return (
     <article
-      className={`group relative flex h-full min-w-0 flex-col overflow-visible rounded-2xl border border-gray-200/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-xl ${
-        flyoutOpen ? "z-50" : "z-0"
-      }`}
+      className={`group relative flex h-full min-w-0 flex-col overflow-visible rounded-2xl border border-gray-200/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-xl ${flyoutOpen ? "z-50" : "z-0"
+        }`}
     >
       <div className="flex flex-1 flex-col p-5">
         {/* Header */}
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <span className={`h-2 w-2 shrink-0 rounded-full ${statusDot}`} />
+              <span
+                className={`h-2 w-2 shrink-0 rounded-full ${statusDot}`}
+              />
 
               <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-green-700">
                 Job Request
@@ -88,7 +67,9 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
         </div>
 
         {/* Posted */}
-        <p className="mt-2 text-xs text-gray-400">Posted {job.posted}</p>
+        <p className="mt-2 text-xs text-gray-400">
+          Posted {job.posted}
+        </p>
 
         {/* Client */}
         <div className="mt-4 flex min-w-0 items-center gap-2.5">
@@ -132,7 +113,9 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
             </div>
 
             <div className="min-w-0">
-              <p className="text-[11px] font-medium text-gray-400">Budget</p>
+              <p className="text-[11px] font-medium text-gray-400">
+                Budget
+              </p>
 
               <p className="truncate text-sm font-semibold text-gray-800">
                 {job.budget}
@@ -146,7 +129,9 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
             </div>
 
             <div className="min-w-0">
-              <p className="text-[11px] font-medium text-gray-400">Deadline</p>
+              <p className="text-[11px] font-medium text-gray-400">
+                Deadline
+              </p>
 
               <p className="truncate text-sm font-semibold text-gray-800">
                 {job.deadline}
@@ -161,16 +146,19 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
             {/* DETAILS */}
             <div
               className="group/details relative"
-              onMouseEnter={() => setOpenFlyoutId(`details-${job.id}`)}
-              onMouseLeave={() => setOpenFlyoutId(null)}
+              onMouseEnter={() =>
+                setOpenFlyoutId(`details-${job.id}`)
+              }
+              onMouseLeave={() =>
+                setOpenFlyoutId(null)
+              }
             >
               <button
                 type="button"
-                className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-200 ${
-                  detailsOpen
+                className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-200 ${detailsOpen
                     ? "border-green-600 bg-green-50 text-green-700"
                     : "border-gray-200 bg-white text-gray-500 hover:border-green-200 hover:bg-green-50 hover:text-green-700"
-                }`}
+                  }`}
                 aria-label="View details"
               >
                 <Info size={16} />
@@ -180,8 +168,12 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
               {detailsOpen && (
                 <div
                   className="absolute bottom-full left-0 z-[60] mb-3 w-[320px] max-w-[calc(100vw-40px)] rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-2xl"
-                  onMouseEnter={() => setOpenFlyoutId(`details-${job.id}`)}
-                  onMouseLeave={() => setOpenFlyoutId(null)}
+                  onMouseEnter={() =>
+                    setOpenFlyoutId(`details-${job.id}`)
+                  }
+                  onMouseLeave={() =>
+                    setOpenFlyoutId(null)
+                  }
                 >
                   <div className="mb-3 flex items-center gap-3">
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-green-50 text-green-700">
@@ -210,16 +202,19 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
             {/* TAGS */}
             <div
               className="relative"
-              onMouseEnter={() => setOpenFlyoutId(`tags-${job.id}`)}
-              onMouseLeave={() => setOpenFlyoutId(null)}
+              onMouseEnter={() =>
+                setOpenFlyoutId(`tags-${job.id}`)
+              }
+              onMouseLeave={() =>
+                setOpenFlyoutId(null)
+              }
             >
               <button
                 type="button"
-                className={`flex h-9 items-center gap-1.5 rounded-xl border px-3 text-xs font-semibold transition-all duration-200 ${
-                  tagsOpen
+                className={`flex h-9 items-center gap-1.5 rounded-xl border px-3 text-xs font-semibold transition-all duration-200 ${tagsOpen
                     ? "border-green-600 bg-green-50 text-green-700"
                     : "border-gray-200 bg-white text-gray-600 hover:border-green-200 hover:bg-green-50 hover:text-green-700"
-                }`}
+                  }`}
               >
                 <Tag size={14} />
                 Tags
@@ -229,8 +224,12 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
               {tagsOpen && (
                 <div
                   className="absolute bottom-full left-0 z-[60] mb-3 w-[280px] rounded-2xl border border-gray-200 bg-white p-4 shadow-2xl"
-                  onMouseEnter={() => setOpenFlyoutId(`tags-${job.id}`)}
-                  onMouseLeave={() => setOpenFlyoutId(null)}
+                  onMouseEnter={() =>
+                    setOpenFlyoutId(`tags-${job.id}`)
+                  }
+                  onMouseLeave={() =>
+                    setOpenFlyoutId(null)
+                  }
                 >
                   <div className="mb-3 flex items-center gap-2">
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-50 text-green-700">
@@ -265,16 +264,21 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
             {/* REQUIREMENTS */}
             <div
               className="relative"
-              onMouseEnter={() => setOpenFlyoutId(`requirements-${job.id}`)}
-              onMouseLeave={() => setOpenFlyoutId(null)}
+              onMouseEnter={() =>
+                setOpenFlyoutId(
+                  `requirements-${job.id}`,
+                )
+              }
+              onMouseLeave={() =>
+                setOpenFlyoutId(null)
+              }
             >
               <button
                 type="button"
-                className={`flex h-9 items-center gap-1.5 rounded-xl border px-3 text-xs font-semibold transition-all duration-200 ${
-                  requirementsOpen
+                className={`flex h-9 items-center gap-1.5 rounded-xl border px-3 text-xs font-semibold transition-all duration-200 ${requirementsOpen
                     ? "border-green-600 bg-green-50 text-green-700"
                     : "border-gray-200 bg-white text-gray-600 hover:border-green-200 hover:bg-green-50 hover:text-green-700"
-                }`}
+                  }`}
               >
                 <ClipboardList size={14} />
                 Requirements
@@ -284,8 +288,14 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
               {requirementsOpen && (
                 <div
                   className="absolute bottom-full left-0 z-[60] mb-3 w-[290px] rounded-2xl border border-gray-200 bg-white p-4 shadow-2xl"
-                  onMouseEnter={() => setOpenFlyoutId(`requirements-${job.id}`)}
-                  onMouseLeave={() => setOpenFlyoutId(null)}
+                  onMouseEnter={() =>
+                    setOpenFlyoutId(
+                      `requirements-${job.id}`,
+                    )
+                  }
+                  onMouseLeave={() =>
+                    setOpenFlyoutId(null)
+                  }
                 >
                   <div className="mb-3 flex items-center gap-2">
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-50 text-green-700">
@@ -304,21 +314,23 @@ function JobCard({ job, openFlyoutId, setOpenFlyoutId, onApprove, onReject }) {
                   </div>
 
                   <div className="space-y-2">
-                    {job.requirements.map((requirement) => (
-                      <div
-                        key={requirement}
-                        className="flex items-start gap-2.5 rounded-lg bg-gray-50 px-3 py-2.5"
-                      >
-                        <Check
-                          size={14}
-                          className="mt-0.5 shrink-0 text-green-600"
-                        />
+                    {job.requirements.map(
+                      (requirement) => (
+                        <div
+                          key={requirement}
+                          className="flex items-start gap-2.5 rounded-lg bg-gray-50 px-3 py-2.5"
+                        >
+                          <Check
+                            size={14}
+                            className="mt-0.5 shrink-0 text-green-600"
+                          />
 
-                        <span className="text-xs leading-5 text-gray-600">
-                          {requirement}
-                        </span>
-                      </div>
-                    ))}
+                          <span className="text-xs leading-5 text-gray-600">
+                            {requirement}
+                          </span>
+                        </div>
+                      ),
+                    )}
                   </div>
                 </div>
               )}
