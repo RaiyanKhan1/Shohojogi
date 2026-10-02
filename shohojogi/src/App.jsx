@@ -1,7 +1,7 @@
-import { useState } from "react";
+
 import Navbar from "./Components/ui/Navbar.jsx";
 import "./App.css";
-import Homepage from "./Pages/Homepage/Homepage";
+
 import {
   BrowserRouter,
   Routes,
@@ -10,6 +10,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import Homepage from "./Pages/Homepage/Homepage";
 import Collections from "./pages/Collections/Collections.jsx";
 import FindWork from "./Pages/FindWork/FindWork.jsx";
 import Join from "./Pages/Join/Join.jsx";
@@ -19,13 +20,40 @@ import TaskDetailsPage from "./Pages/TaskDetails/TaskDetailsPage.jsx";
 import PostTask from "./Pages/PostTask/PostTask.jsx";
 import PostService from "./Pages/PostTask/PostService.jsx";
 import AdminPage from "./Pages/Admin/AdminPage.jsx";
+import AdminLoginPage from "./Pages/Admin/AdminLoginPage.jsx";
 import ClientApplicationsPage from "./Pages/Client/ClientApplicationsPage.jsx";
 
-function PublicOnly({ children }) {
-  const stored = localStorage.getItem("user");
+function getStoredUser() {
+  try {
+    return JSON.parse(localStorage.getItem("user") || "null");
+  } catch {
+    return null;
+  }
+}
 
-  if (stored) {
+function PublicOnly({ children }) {
+  if (getStoredUser()) {
     return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
+
+function AdminEntry() {
+  const user = getStoredUser();
+
+  if (user?.role === "admin") {
+    return <Navigate to="/admin/dashboard" replace />;
+  }
+
+  return <AdminLoginPage />;
+}
+
+function AdminRoute({ children }) {
+  const user = getStoredUser();
+
+  if (user?.role !== "admin") {
+    return <Navigate to="/admin" replace />;
   }
 
   return children;
@@ -33,8 +61,7 @@ function PublicOnly({ children }) {
 
 function AppContent() {
   const location = useLocation();
-
-  const hideNavbar = location.pathname === "/admin";
+  const hideNavbar = location.pathname.startsWith("/admin");
 
   return (
     <>
@@ -45,38 +72,54 @@ function AppContent() {
         <Route path="/collections" element={<Collections />} />
         <Route path="/find-work" element={<FindWork />} />
         <Route path="/product" element={<ProductPage />} />
+
         <Route
           path="/join"
           element={
             <PublicOnly>
-              {" "}
-              <Join />{" "}
+              <Join />
             </PublicOnly>
           }
         />
+
         <Route path="/why-shohojogi" element={<WhyShohojogi />} />
         <Route path="/task/:id" element={<TaskDetailsPage />} />
-        <Route path="/task" element={<Navigate to="/find-work" replace />} />
+        <Route
+          path="/task"
+          element={<Navigate to="/find-work" replace />}
+        />
         <Route path="/post-task" element={<PostTask />} />
         <Route path="/post-service" element={<PostService />} />
+
         <Route
           path="/client/applications"
           element={<ClientApplicationsPage />}
         />
-        <Route path="/admin" element={<AdminPage />} />
+
+        <Route path="/admin" element={<AdminEntry />} />
+
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminRoute>
+              <AdminPage />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
       </Routes>
     </>
   );
 }
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
     <BrowserRouter>
       <AppContent />
     </BrowserRouter>
   );
 }
-
-export default App;

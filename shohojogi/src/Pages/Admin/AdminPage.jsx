@@ -40,10 +40,10 @@ function mapTaskToJob(task) {
 
     deadline: task.deadline
       ? new Date(task.deadline).toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        })
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
       : "No deadline",
 
     tags: Array.isArray(task.tags) ? task.tags : [],
@@ -136,20 +136,18 @@ function TabButton({ active, onClick, label, count }) {
     <button
       type="button"
       onClick={onClick}
-      className={`group flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold cursor-pointer transition-all duration-200 ${
-        active
-          ? "bg-green-700 text-white shadow-sm"
-          : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-      }`}
+      className={`group flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold cursor-pointer transition-all duration-200 ${active
+        ? "bg-green-700 text-white shadow-sm"
+        : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+        }`}
     >
       {label}
 
       <span
-        className={`rounded-full px-2 py-0.5 text-xs font-semibold transition ${
-          active
-            ? "bg-white/15 text-white"
-            : "bg-gray-100 text-gray-500 group-hover:bg-gray-200"
-        }`}
+        className={`rounded-full px-2 py-0.5 text-xs font-semibold transition ${active
+          ? "bg-white/15 text-white"
+          : "bg-gray-100 text-gray-500 group-hover:bg-gray-200"
+          }`}
       >
         {count}
       </span>
@@ -207,6 +205,7 @@ function AdminPage() {
 
       const response = await fetch(`${ADMIN_API}/tasks`, {
         method: "GET",
+        credentials: "include",
       });
 
       const data = await response.json();
@@ -233,7 +232,7 @@ function AdminPage() {
     fetchTasks();
   }, [fetchTasks]);
 
- // Statistics
+  // Statistics
   const stats = useMemo(() => {
     return {
       total: jobs.length,
@@ -280,7 +279,7 @@ function AdminPage() {
     });
   }, [jobs, activeTab, search]);
 
-// Change task status through backend
+  // Change task status through backend
   const updateTaskStatus = async (id, status) => {
     try {
       setActionLoadingId(id);
@@ -288,7 +287,7 @@ function AdminPage() {
 
       const response = await fetch(`${ADMIN_API}/tasks/${id}/approval`, {
         method: "PATCH",
-
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -315,9 +314,9 @@ function AdminPage() {
           currentJobs.map((job) =>
             job.id === id
               ? {
-                  ...job,
-                  status,
-                }
+                ...job,
+                status,
+              }
               : job,
           ),
         );

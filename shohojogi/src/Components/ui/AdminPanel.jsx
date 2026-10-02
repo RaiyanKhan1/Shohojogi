@@ -5,6 +5,7 @@ import {
   LogOut,
   X as CloseIcon,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function AdminPanel({
   activeSection,
@@ -13,6 +14,29 @@ function AdminPanel({
   setSidebarOpen,
   pendingCount,
 }) {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const apiBase = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
+
+    try {
+      if (apiBase) {
+        await fetch(`${apiBase}/admin/logout`, {
+          method: "POST",
+          credentials: "include",
+        });
+      }
+    } catch (error) {
+      console.error("Logout request failed:", error);
+    } finally {
+      // Remove the frontend admin session
+      localStorage.removeItem("user");
+
+      // Return to admin login
+      navigate("/admin", { replace: true });
+    }
+  };
+
   return (
     <>
       {/* Mobile backdrop */}
@@ -26,9 +50,8 @@ function AdminPanel({
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-[252px] flex-col overflow-hidden border-r border-gray-200 bg-white shadow-[4px_0_24px_rgba(22,163,74,0.08)] transition-transform duration-300 lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed inset-y-0 left-0 z-50 flex w-[252px] flex-col overflow-hidden border-r border-gray-200 bg-white shadow-[4px_0_24px_rgba(22,163,74,0.08)] transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         {/* glow */}
         <div
@@ -89,11 +112,10 @@ function AdminPanel({
               setActiveSection("dashboard");
               setSidebarOpen(false);
             }}
-            className={`flex w-full items-center justify-between rounded-xl px-3.5 py-3 text-sm font-semibold cursor-pointer transition ${
-              activeSection === "dashboard"
+            className={`flex w-full items-center justify-between rounded-xl px-3.5 py-3 text-sm font-semibold cursor-pointer transition ${activeSection === "dashboard"
                 ? "bg-green-700 text-white shadow-sm"
                 : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-            }`}
+              }`}
           >
             <span className="flex items-center gap-3">
               <LayoutDashboard size={18} />
@@ -101,11 +123,10 @@ function AdminPanel({
             </span>
 
             <span
-              className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                activeSection === "dashboard"
+              className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${activeSection === "dashboard"
                   ? "bg-white/15 text-white"
                   : "bg-gray-100 text-gray-500"
-              }`}
+                }`}
             >
               {pendingCount}
             </span>
@@ -118,11 +139,10 @@ function AdminPanel({
               setActiveSection("settings");
               setSidebarOpen(false);
             }}
-            className={`mt-1.5 flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold cursor-pointer transition ${
-              activeSection === "settings"
+            className={`mt-1.5 flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold cursor-pointer transition ${activeSection === "settings"
                 ? "bg-green-700 text-white shadow-sm"
                 : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-            }`}
+              }`}
           >
             <Settings size={18} />
             Settings
@@ -133,7 +153,7 @@ function AdminPanel({
         <div className="relative z-10 mt-auto border-t border-gray-100 p-4">
           <button
             type="button"
-            onClick={() => console.log("Logout")}
+            onClick={handleLogout}
             className="flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold cursor-pointer text-gray-500 transition hover:bg-rose-700 hover:text-white"
           >
             <LogOut size={18} />
