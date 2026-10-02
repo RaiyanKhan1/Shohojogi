@@ -19,6 +19,7 @@ import TaskDetailsPage from "./Pages/TaskDetails/TaskDetailsPage.jsx";
 import PostTask from "./Pages/PostTask/PostTask.jsx";
 import PostService from "./Pages/PostTask/PostService.jsx";
 import AdminPage from "./Pages/Admin/AdminPage.jsx";
+import ClientApplicationsPage from "./Pages/Client/ClientApplicationsPage.jsx";
 
 function PublicOnly({ children }) {
   const stored = localStorage.getItem("user");
@@ -58,6 +59,10 @@ function AppContent() {
         <Route path="/task" element={<Navigate to="/find-work" replace />} />
         <Route path="/post-task" element={<PostTask />} />
         <Route path="/post-service" element={<PostService />} />
+        <Route
+          path="/client/applications"
+          element={<ClientApplicationsPage />}
+        />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </>

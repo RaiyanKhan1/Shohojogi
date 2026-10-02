@@ -6,8 +6,14 @@ import ApplicantsList from "./ApplicantsList";
 export default function TaskSidebar({ task }) {
   return (
     <div className="td-sidebar">
-      <ApplyCard budget={task.budget} applicants={task.applicants} />
+      <ApplyCard
+        taskId={task.id}
+        budget={task.budget}
+        applicants={task.applicants}
+      />
+
       <PosterCard poster={task.poster} />
+
       {task.applicantsList?.length > 0 && (
         <ApplicantsList applicants={task.applicantsList} />
       )}
