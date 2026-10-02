@@ -1,4 +1,3 @@
-
 import Navbar from "./Components/ui/Navbar.jsx";
 import "./App.css";
 
@@ -86,10 +85,7 @@ function AppContent() {
 
         <Route path="/why-shohojogi" element={<WhyShohojogi />} />
         <Route path="/task/:id" element={<TaskDetailsPage />} />
-        <Route
-          path="/task"
-          element={<Navigate to="/find-work" replace />}
-        />
+        <Route path="/task" element={<Navigate to="/find-work" replace />} />
         <Route path="/post-task" element={<PostTask />} />
         <Route path="/post-service" element={<PostService />} />
 
@@ -114,10 +110,7 @@ function AppContent() {
           }
         />
 
-        <Route
-          path="*"
-          element={<Navigate to="/" replace />}
-        />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );

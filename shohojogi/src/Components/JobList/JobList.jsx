@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Wallet, CalendarDays } from "lucide-react";
+import { Wallet, CalendarDays, Tag } from "lucide-react";
 import "./JobList.css";
 
 function JobCard({ job }) {
   return (
     <div className="job-card">
       <div className="job-title-block">
+        {job.category && (
+          <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-green-50 px-2.5 py-1 text-xs font-semibold text-green-700">
+            <Tag size={12} />
+            {job.category}
+          </span>
+        )}
         <p className="job-title">{job.title}</p>
         {job.trustLevel && (
           <span

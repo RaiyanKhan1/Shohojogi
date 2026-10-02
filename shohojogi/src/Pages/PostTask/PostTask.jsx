@@ -14,6 +14,26 @@ import "./PostTask.css";
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
 
+// Must match TASK_CATEGORIES in the server's task model.
+const CATEGORY_OPTIONS = [
+  "Home Services",
+  "Electricians & Plumbers",
+  "Appliance & AC Repair",
+  "Carpentry & Painting",
+  "Drivers & Transport",
+  "Movers & Shifting",
+  "Delivery & Food Runs",
+  "Errands & Bill Payments",
+  "Tutors",
+  "Child Care",
+  "Elderly & Patient Care",
+  "Security Guards",
+  "Event Specialists",
+  "Tour Guides",
+  "Beauty & Grooming",
+  "Tech Support",
+];
+
 const TAG_OPTIONS = [
   { id: "police", label: "Police verification required", icon: ShieldCheck },
   { id: "nid", label: "NID required", icon: IdCard },
@@ -23,6 +43,7 @@ const TAG_OPTIONS = [
 
 function PostTask() {
   const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const [budget, setBudget] = useState("");
   const [deadline, setDeadline] = useState("");
@@ -109,6 +130,7 @@ function PostTask() {
 
     const body = new FormData();
     body.append("taskName", title);
+    body.append("category", category);
     body.append("location", location);
     body.append("deadline", deadline);
     body.append("budget", budget);
@@ -163,6 +185,7 @@ function PostTask() {
         } until an admin reviews it.`
       );
       setTitle("");
+      setCategory("");
       setLocation("");
       setBudget("");
       setDeadline("");
@@ -202,6 +225,25 @@ function PostTask() {
             placeholder="e.g. Grocery shopping"
             required
           />
+        </label>
+
+        <label className="pt-field">
+          <span className="pt-label">Category</span>
+          <select
+            name="category"
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Select a category
+            </option>
+            {CATEGORY_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         </label>
 
         <label className="pt-field">

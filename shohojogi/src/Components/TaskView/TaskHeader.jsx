@@ -1,25 +1,51 @@
 import React from "react";
-import { MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, MapPin, CalendarDays, Clock, Tag } from "lucide-react";
+
+const statusClass = (status) => {
+  const value = String(status).toLowerCase();
+
+  if (value === "open") return "td-status td-status--open";
+  if (value === "rejected") return "td-status td-status--closed";
+
+  return "td-status td-status--pending";
+};
 
 export default function TaskHeader({ task }) {
   return (
-    <div className="td-header td-fade-in-up">
-      <div>
-        <div className="td-header__title-row">
-          <h1 className="td-header__title">{task.title}</h1>
-          <span className="td-status-badge">{task.status}</span>
-        </div>
-        {task.category && <p className="td-header__category">{task.category}</p>}
-        <div className="td-header__meta">
-          {task.location && (
-            <span className="td-header__meta-item">
-              <MapPin size={14} /> {task.location}
-            </span>
-          )}
-          {task.postedDate && <span>Posted {task.postedDate}</span>}
-          {task.deadline && <span>Deadline {task.deadline}</span>}
-        </div>
+    <header className="td-header td-fade-in-up">
+      <Link to="/find-work" className="td-back">
+        <ArrowLeft size={16} /> Back to tasks
+      </Link>
+
+      <div className="td-header__badges">
+        {task.category && (
+          <span className="td-category">
+            <Tag size={13} /> {task.category}
+          </span>
+        )}
+        <span className={statusClass(task.status)}>{task.status}</span>
       </div>
-    </div>
+
+      <h1 className="td-header__title">{task.title}</h1>
+
+      <div className="td-header__meta">
+        {task.location && (
+          <span className="td-header__meta-item">
+            <MapPin size={15} /> {task.location}
+          </span>
+        )}
+        {task.postedDate && (
+          <span className="td-header__meta-item">
+            <CalendarDays size={15} /> Posted {task.postedDate}
+          </span>
+        )}
+        {task.deadline && (
+          <span className="td-header__meta-item">
+            <Clock size={15} /> Due {task.deadline}
+          </span>
+        )}
+      </div>
+    </header>
   );
 }

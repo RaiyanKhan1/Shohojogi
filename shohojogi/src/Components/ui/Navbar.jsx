@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import bannerLogo from "../../assets/icons/banner.svg";
 
 function Navbar() {
   const navLinks = [
@@ -58,7 +59,8 @@ function Navbar() {
         <div>
           <img
             className="flex h-7 sm:h-8 w-auto m-4 cursor-pointer"
-            src="src/assets/icons/banner.svg"
+            src={bannerLogo}
+            alt="Shohojogi"
             onClick={() => navigate("/")}
           ></img>
         </div>

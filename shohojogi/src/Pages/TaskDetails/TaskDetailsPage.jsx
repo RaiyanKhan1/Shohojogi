@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft, CircleAlert } from "lucide-react";
 import "./task-details.css";
 import TaskHeader from "../../Components/TaskView/TaskHeader";
 import TaskInfo from "../../Components/TaskView/TaskInfo";
@@ -69,9 +70,28 @@ export default function TaskDetailsPage() {
   return (
     <div className="td-page">
       <div className="td-container">
-        {loading && <p>Loading task...</p>}
+        {loading && (
+          <div className="td-skeleton" aria-busy="true" aria-label="Loading task">
+            <div className="td-skeleton__line td-skeleton__line--sm" />
+            <div className="td-skeleton__line td-skeleton__line--lg" />
+            <div className="td-skeleton__line td-skeleton__line--md" />
+            <div className="td-grid">
+              <div className="td-skeleton__block td-skeleton__block--tall" />
+              <div className="td-skeleton__block" />
+            </div>
+          </div>
+        )}
 
-        {!loading && error && <p role="alert">{error}</p>}
+        {!loading && error && (
+          <div className="td-card td-error" role="alert">
+            <CircleAlert size={28} />
+            <h2 className="td-card__title">We couldn't load this task</h2>
+            <p className="td-card__text">{error}</p>
+            <Link to="/find-work" className="td-back">
+              <ArrowLeft size={16} /> Back to tasks
+            </Link>
+          </div>
+        )}
 
         {!loading && !error && task && (
           <>

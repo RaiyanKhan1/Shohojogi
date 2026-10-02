@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { MessageCircle, CheckCircle2, LoaderCircle } from "lucide-react";
+import {
+  Send,
+  CheckCircle2,
+  LoaderCircle,
+  CalendarDays,
+  Users,
+} from "lucide-react";
 
 export default function ApplyCard({
   taskId,
   budget,
+  deadline,
+  status,
   applicants,
 }) {
   const [applied, setApplied] = useState(false);
@@ -49,38 +57,41 @@ export default function ApplyCard({
     }
   };
 
+  const isOpen = String(status).toLowerCase() === "open";
+
   return (
-    <div
-      className="td-apply-card td-fade-in-up"
-      style={{ animationDelay: "120ms" }}
-    >
+    <section className="td-card td-apply-card td-fade-in-up" style={{ animationDelay: "100ms" }}>
+      <h3 className="td-card__eyebrow">Budget</h3>
       <div className="td-apply-card__price">
-        {budget}tk{" "}
-        <span className="td-apply-card__price-unit">/ task</span>
+        ৳{budget != null ? budget.toLocaleString() : "—"}
+        <span className="td-apply-card__price-unit">fixed price</span>
       </div>
 
-      <div className="td-apply-card__divider" />
-
-      <div className="td-apply-card__status">
-        <span className="td-apply-card__dot" />
-        Open for applicants
-      </div>
-
-      {applicants != null && (
-        <p className="td-apply-card__sub">
-          {applicants} people already applied
-        </p>
-      )}
+      <ul className="td-apply-card__facts">
+        <li>
+          <span className={`td-apply-card__dot${isOpen ? "" : " td-apply-card__dot--muted"}`} />
+          {isOpen ? "Open for applicants" : `Status: ${status}`}
+        </li>
+        {deadline && (
+          <li>
+            <CalendarDays size={15} /> Apply before {deadline}
+          </li>
+        )}
+        {applicants != null && (
+          <li>
+            <Users size={15} /> {applicants} people already applied
+          </li>
+        )}
+      </ul>
 
       <button
         onClick={handleApply}
         disabled={loading || applied}
-        className={`td-apply-btn${applied ? " td-apply-btn--applied" : ""
-          }`}
+        className={`td-apply-btn${applied ? " td-apply-btn--applied" : ""}`}
       >
         {loading ? (
           <>
-            <LoaderCircle size={16} />
+            <LoaderCircle size={16} className="td-spin" />
             Submitting...
           </>
         ) : applied ? (
@@ -90,23 +101,23 @@ export default function ApplyCard({
           </>
         ) : (
           <>
-            <MessageCircle size={16} />
+            <Send size={16} />
             Apply for this task
           </>
         )}
       </button>
 
       {error && (
-        <p role="alert" style={{ color: "#dc2626", marginTop: 10 }}>
+        <p role="alert" className="td-alert td-alert--error">
           {error}
         </p>
       )}
 
       {success && (
-        <p role="status" style={{ color: "#15803d", marginTop: 10 }}>
+        <p role="status" className="td-alert td-alert--success">
           {success}
         </p>
       )}
-    </div>
+    </section>
   );
 }

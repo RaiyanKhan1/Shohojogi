@@ -1,4 +1,5 @@
 import React from "react";
+import searchIcon from "../../assets/icons/search.svg";
 
 function SearchBar() {
   return (
@@ -16,7 +17,8 @@ function SearchBar() {
         ></input>
         <button className="flex items-center justify-center gap-2 h-full w-1/4 md:w-1/5 bg-green-700 rounded-full text-white md:text-2xl border border-green-800 border-b-2 border-r-2 shadow-[1px_1px_0px_rgba(255,255,255,0.3),6px_8px_12px_rgba(0,0,0,0.25)] hover:outline-2 hover:outline-offset-2 hover:transition-all hover:outline-black/50 ">
           <img
-            src="src/assets/icons/search.svg"
+            src={searchIcon}
+            alt=""
             className="h-4 w-4 md:h-5 md:w-5"
           ></img>
           Search

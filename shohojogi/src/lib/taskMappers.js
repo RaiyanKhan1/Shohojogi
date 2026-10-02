@@ -32,6 +32,7 @@ export const formatDate = (value) => {
 export const toJob = (task) => ({
   id: task._id,
   title: task.taskName,
+  category: task.category ?? null,
   type: task.location,
   postedAgo: timeAgo(task.createdAt),
   description: task.details,
@@ -52,7 +53,7 @@ export const toTaskView = (task) => ({
   tags: task.tags ?? [],
   requirements: task.requirements ?? [],
   image: task.taskImage?.url ?? null,
-  category: null,
+  category: task.category ?? null,
   duration: null,
   applicants: null,
   applicantsList: [],

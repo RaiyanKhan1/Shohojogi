@@ -9,6 +9,8 @@ export default function TaskSidebar({ task }) {
       <ApplyCard
         taskId={task.id}
         budget={task.budget}
+        deadline={task.deadline}
+        status={task.status}
         applicants={task.applicants}
       />
 

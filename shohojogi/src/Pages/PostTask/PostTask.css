@@ -83,6 +83,7 @@
 .pt-sheet input[type="text"],
 .pt-sheet input[type="number"],
 .pt-sheet input[type="date"],
+.pt-sheet select,
 .pt-sheet textarea {
   width: 100%;
   padding: 13px 15px;
@@ -100,6 +101,7 @@
 .pt-sheet textarea::placeholder { color: #a6b1aa; }
 
 .pt-sheet input:focus,
+.pt-sheet select:focus,
 .pt-sheet textarea:focus {
   border-bottom-color: #087b2c;
   background: #f1fbf4;

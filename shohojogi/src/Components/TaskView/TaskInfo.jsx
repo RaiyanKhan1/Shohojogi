@@ -1,69 +1,85 @@
 import React from "react";
+import {
+  Wallet,
+  CalendarDays,
+  MapPin,
+  Timer,
+  Users,
+  ShieldCheck,
+  CircleCheck,
+} from "lucide-react";
 import StatBox from "./StatBox";
 
 export default function TaskInfo({ task }) {
   const stats = [
-    task.budget != null && { value: `${task.budget}tk`, sub: "Budget" },
-    task.duration && { value: task.duration, sub: "Estimated time" },
-    task.applicants != null && { value: task.applicants, sub: "Applicants" },
+    task.budget != null && {
+      icon: Wallet,
+      value: `৳${task.budget.toLocaleString()}`,
+      sub: "Budget",
+    },
+    task.deadline && { icon: CalendarDays, value: task.deadline, sub: "Deadline" },
+    task.location && { icon: MapPin, value: task.location, sub: "Location" },
+    task.duration && { icon: Timer, value: task.duration, sub: "Estimated time" },
+    task.applicants != null && { icon: Users, value: task.applicants, sub: "Applicants" },
   ].filter(Boolean);
 
   return (
     <div className="td-main">
       {stats.length > 0 && (
-        <div className="td-stats-row">
-          {stats.map((stat, i) => (
-            <StatBox
-              key={stat.sub}
-              value={stat.value}
-              sub={stat.sub}
-              delay={i * 80}
-            />
-          ))}
-        </div>
-      )}
-
-      {task.tags.length > 0 && (
-        <div className="td-tags-box td-fade-in-up" style={{ animationDelay: "200ms" }}>
-          <div className="td-tags-box__row">
-            {task.tags.map((p, i) => (
-              <span
-                key={p}
-                className="td-fade-in-up"
-                style={{ animationDelay: `${240 + i * 80}ms`, display: "inline-block" }}
-              >
-                <span className="td-pill">{p}</span>
-              </span>
+        <section className="td-card td-fade-in-up" style={{ animationDelay: "60ms" }}>
+          <h2 className="td-card__title">Overview</h2>
+          <div className="td-stats-grid">
+            {stats.map((stat) => (
+              <StatBox key={stat.sub} icon={stat.icon} value={stat.value} sub={stat.sub} />
             ))}
           </div>
-        </div>
+        </section>
       )}
 
       {task.description && (
-        <div className="td-fade-in-up" style={{ animationDelay: "300ms" }}>
-          <h2 className="td-section__title">Details</h2>
-          <p className="td-section__text">{task.description}</p>
-        </div>
+        <section className="td-card td-fade-in-up" style={{ animationDelay: "120ms" }}>
+          <h2 className="td-card__title">About this task</h2>
+          <p className="td-card__text">{task.description}</p>
+        </section>
+      )}
+
+      {(task.tags.length > 0 || task.requirements.length > 0) && (
+        <section className="td-card td-fade-in-up" style={{ animationDelay: "180ms" }}>
+          {task.tags.length > 0 && (
+            <div className="td-block">
+              <h2 className="td-card__title">Helper must have</h2>
+              <div className="td-pills">
+                {task.tags.map((tag) => (
+                  <span key={tag} className="td-pill">
+                    <ShieldCheck size={15} /> {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {task.requirements.length > 0 && (
+            <div className="td-block">
+              <h2 className="td-card__title">Requirements</h2>
+              <ul className="td-checklist">
+                {task.requirements.map((item) => (
+                  <li key={item}>
+                    <CircleCheck size={17} /> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
       )}
 
       {task.image && (
-        <div className="td-fade-in-up" style={{ animationDelay: "330ms" }}>
-          <h2 className="td-section__title td-section__title--spaced">Photo</h2>
-          <img className="td-task-image" src={task.image} alt={task.title} loading="lazy" />
-        </div>
-      )}
-
-      {task.requirements.length > 0 && (
-        <div className="td-fade-in-up" style={{ animationDelay: "360ms" }}>
-          <h2 className="td-section__title td-section__title--spaced">What's needed</h2>
-          <div className="td-requirements">
-            {task.requirements.map((r) => (
-              <span key={r} className="td-requirement-chip">
-                {r}
-              </span>
-            ))}
-          </div>
-        </div>
+        <section className="td-card td-fade-in-up" style={{ animationDelay: "240ms" }}>
+          <h2 className="td-card__title">Photo</h2>
+          <a href={task.image} target="_blank" rel="noreferrer">
+            <img className="td-task-image" src={task.image} alt={task.title} loading="lazy" />
+          </a>
+        </section>
       )}
     </div>
   );
