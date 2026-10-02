@@ -84,6 +84,33 @@ export default function ClientApplicationsPage() {
         }
     };
 
+    // Accepting a worker requires paying through SSLCommerz first.
+    const startPayment = async (applicationId) => {
+        setUpdatingId(applicationId);
+        setError("");
+
+        try {
+            const response = await fetch(
+                `${API_URL}/payment/init/${applicationId}`,
+                {
+                    method: "POST",
+                    credentials: "include",
+                },
+            );
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok || !data.url) {
+                throw new Error(data.error || "Unable to start payment.");
+            }
+
+            window.location.href = data.url;
+        } catch (err) {
+            setError(err.message || "Unable to start payment.");
+            setUpdatingId(null);
+        }
+    };
+
     if (loading) {
         return <main style={{ padding: 32 }}>Loading applications...</main>;
     }
@@ -190,9 +217,7 @@ export default function ClientApplicationsPage() {
                                 >
                                     <button
                                         disabled={updating}
-                                        onClick={() =>
-                                            updateStatus(application._id, "accepted")
-                                        }
+                                        onClick={() => startPayment(application._id)}
                                         style={acceptButtonStyle}
                                     >
                                         {updating ? "Saving..." : "Accept worker"}

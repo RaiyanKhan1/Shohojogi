@@ -12,6 +12,7 @@ import {
 
 import AdminPanel from "../../Components/ui/AdminPanel";
 import JobCard from "../../Components/ui/JobCard";
+import WorkerVerifications from "../../Components/Admin/WorkerVerifications";
 
 // API
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
@@ -602,6 +603,8 @@ function AdminPage() {
               </section>
             </div>
           </>
+        ) : activeSection === "verifications" ? (
+          <WorkerVerifications />
         ) : (
           /* Settings */
 

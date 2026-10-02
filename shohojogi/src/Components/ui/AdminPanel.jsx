@@ -1,6 +1,7 @@
 import React from "react";
 import {
   LayoutDashboard,
+  BadgeCheck,
   Settings,
   LogOut,
   X as CloseIcon,
@@ -130,6 +131,23 @@ function AdminPanel({
             >
               {pendingCount}
             </span>
+          </button>
+
+          {/* Verifications */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveSection("verifications");
+              setSidebarOpen(false);
+            }}
+            className={`mt-1.5 flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-sm font-semibold cursor-pointer transition ${
+              activeSection === "verifications"
+                ? "bg-green-700 text-white shadow-sm"
+                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+            }`}
+          >
+            <BadgeCheck size={18} />
+            Verifications
           </button>
 
           {/* Settings */}
