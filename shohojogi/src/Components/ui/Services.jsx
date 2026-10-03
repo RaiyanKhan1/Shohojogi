@@ -151,7 +151,7 @@ const Services = () => {
       {/* Explore All */}
       <div className="mt-9 flex justify-center">
         <button
-          onClick={() => navigate("/collections")}
+          onClick={() => navigate("/find-work")}
           className="
             group flex h-11 w-full max-w-xs
             cursor-pointer items-center justify-center

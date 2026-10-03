@@ -18,7 +18,7 @@ import bannerLogo from "../../assets/icons/banner.svg";
 function Navbar() {
   const navLinks = [
     { name: "Find Work", link: "/find-work" },
-    { name: "Hire People", link: "/collections" },
+
     { name: "Why Shohojogi", link: "/why-shohojogi" },
   ];
   const navigate = useNavigate();
@@ -171,18 +171,18 @@ function Navbar() {
                     )}
                     {user.role === "client" && (
                       <button
-                      onClick={() => {
-                        setAccountOpen(false);
-                        navigate("/client/applications");
-                      }}
-                      className="flex w-full items-center gap-3 rounded-xl
+                        onClick={() => {
+                          setAccountOpen(false);
+                          navigate("/client/applications");
+                        }}
+                        className="flex w-full items-center gap-3 rounded-xl
                       px-3 py-2.5 text-sm text-gray-700
                       hover:bg-gray-100 transition"
                       >
                         <Send size={18} />
                         <span>Applications</span>
-                        </button>
-                      )}
+                      </button>
+                    )}
 
                     {/* Applications dashboard — workers only */}
                     {user.role === "worker" && (
