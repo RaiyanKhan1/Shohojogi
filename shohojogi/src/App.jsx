@@ -22,6 +22,7 @@ import AdminPage from "./Pages/Admin/AdminPage.jsx";
 import AdminLoginPage from "./Pages/Admin/AdminLoginPage.jsx";
 import ClientApplicationsPage from "./Pages/Client/ClientApplicationsPage.jsx";
 import WorkerVerificationPage from "./Pages/Worker/WorkerVerificationPage.jsx";
+import WorkerApplicationsPage from "./Pages/Worker/WorkerApplicationsPage.jsx";
 import PaymentResultPage from "./Pages/Payment/PaymentResultPage.jsx";
 
 function getStoredUser() {
@@ -96,6 +97,10 @@ function AppContent() {
         <Route
           path="/worker/verification"
           element={<WorkerVerificationPage />}
+        />
+        <Route
+          path="/worker/applications"
+          element={<WorkerApplicationsPage />}
         />
         <Route path="/payment/:result" element={<PaymentResultPage />} />
 

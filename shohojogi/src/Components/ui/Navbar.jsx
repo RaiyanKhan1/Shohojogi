@@ -170,6 +170,22 @@ function Navbar() {
                       </button>
                     )}
 
+                    {/* Applications dashboard — workers only */}
+                    {user.role === "worker" && (
+                      <button
+                        onClick={() => {
+                          setAccountOpen(false);
+                          navigate("/worker/applications");
+                        }}
+                        className="flex w-full items-center gap-3 rounded-xl
+               px-3 py-2.5 text-sm text-gray-700
+               hover:bg-gray-100 transition"
+                      >
+                        <BriefcaseBusiness size={18} />
+                        <span>My Applications</span>
+                      </button>
+                    )}
+
                     {/* Verification — workers only */}
                     {user.role === "worker" && (
                       <button
