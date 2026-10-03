@@ -16,6 +16,7 @@ import DashboardHero from "../../Components/ui/DashboardHero";
 import DashboardSearch from "../../Components/ui/DashboardSearch";
 import DashboardTabs from "../../Components/ui/DashboardTabs";
 import ApplicationCard from "../../Components/ui/ApplicationCard";
+import AccessRestricted from "../../Components/ui/AccessRestricted";
 
 const API_URL = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
 
@@ -27,6 +28,15 @@ export default function ClientApplicationsPage() {
 
     const [activeTab, setActiveTab] = useState("pending");
     const [search, setSearch] = useState("");
+
+    const stored = localStorage.getItem("user");
+    const user = stored ? JSON.parse(stored) : null;
+
+    if (!user || user.role !== "client") {
+        return (
+            <AccessRestricted message="Only clients can access this page." />
+        );
+    }
 
     const loadApplications = useCallback(async () => {
         if (!API_URL) {
@@ -354,10 +364,6 @@ export default function ClientApplicationsPage() {
                                     Worker Applications
                                 </h2>
 
-                                <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                                    Review applicants for your posted tasks and manage
-                                    their application status.
-                                </p>
                             </div>
 
                             <DashboardSearch
@@ -399,7 +405,7 @@ export default function ClientApplicationsPage() {
                                 ))}
                             </div>
                         ) : filteredApplications.length > 0 ? (
-                            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                            <div className="grid grid-cols-1 gap-5 md:grid-cols-3 xl:grid-cols-3">
                                 {filteredApplications.map((application) => (
                                     <ApplicationCard
                                         key={application._id}

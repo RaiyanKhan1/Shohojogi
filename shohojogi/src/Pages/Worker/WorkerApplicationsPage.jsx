@@ -19,6 +19,7 @@ import StatusBadge from "../../Components/ui/StatusBadge";
 import DashboardHero from "../../Components/ui/DashboardHero";
 import DashboardSearch from "../../Components/ui/DashboardSearch";
 import DashboardTabs from "../../Components/ui/DashboardTabs";
+import AccessRestricted from "../../Components/ui/AccessRestricted";
 
 const API_URL = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
 
@@ -29,6 +30,15 @@ export default function WorkerApplicationsPage() {
 
     const [activeTab, setActiveTab] = useState("pending");
     const [search, setSearch] = useState("");
+
+    const stored = localStorage.getItem("user");
+    const user = stored ? JSON.parse(stored) : null;
+
+    if (!user || user.role !== "worker") {
+        return (
+        <AccessRestricted message="Only workers can access this page." />
+    );
+}
 
     const loadApplications = useCallback(async () => {
         if (!API_URL) {
