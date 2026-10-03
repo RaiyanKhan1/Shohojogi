@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+    Award,
     BriefcaseBusiness,
     CalendarDays,
     Check,
@@ -18,11 +19,34 @@ function ApplicationCard({
     updating = false,
     onAccept,
     onReject,
+    onRate,
 }) {
     const worker = application?.worker;
     const task = application?.task;
 
     const status = application?.status || "pending";
+
+    // Rating given by this client for this application (1-5), if any.
+    const myRating = application?.rating ?? null;
+    const [editingRating, setEditingRating] = useState(false);
+    const [selectedRating, setSelectedRating] = useState(null);
+
+    const workerRatingCount = worker?.ratingCount || 0;
+    const workerRating =
+        workerRatingCount > 0
+            ? `${Number(worker.rating).toFixed(1)} / 5`
+            : "No ratings yet";
+
+    const submitRating = async () => {
+        if (!selectedRating || !onRate) return;
+
+        const saved = await onRate(selectedRating);
+
+        if (saved) {
+            setEditingRating(false);
+            setSelectedRating(null);
+        }
+    };
 
     const appliedDate = application?.createdAt
         ? new Date(application.createdAt).toLocaleDateString("en-GB", {
@@ -94,6 +118,29 @@ function ApplicationCard({
 
                         <p className="truncate text-sm font-semibold text-gray-800">
                             {worker?.name || "Unknown worker"}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Worker Rating */}
+                <div className="mt-3 flex min-w-0 items-center gap-2.5">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-50 text-green-700">
+                        <Award size={15} />
+                    </div>
+
+                    <div className="min-w-0">
+                        <p className="text-[10px] font-medium uppercase tracking-wide text-gray-400">
+                            Worker Rating
+                        </p>
+
+                        <p className="truncate text-sm font-semibold text-gray-800">
+                            {workerRating}
+                            {workerRatingCount > 0 && (
+                                <span className="ml-1.5 text-xs font-medium text-gray-400">
+                                    ({workerRatingCount}{" "}
+                                    {workerRatingCount === 1 ? "rating" : "ratings"})
+                                </span>
+                            )}
                         </p>
                     </div>
                 </div>
@@ -217,6 +264,84 @@ function ApplicationCard({
                         <div className="flex h-9 items-center justify-center gap-1.5 rounded-xl bg-green-50 text-xs font-semibold text-green-700">
                             <Check size={15} />
                             Worker Accepted
+                        </div>
+                    )}
+
+                    {/* Rate the accepted worker */}
+                    {status === "accepted" && onRate && (
+                        <div className="mt-2 rounded-xl border border-gray-200 p-3">
+                            {myRating && !editingRating ? (
+                                <div className="flex items-center justify-between gap-2">
+                                    <p className="text-xs text-gray-500">
+                                        Your rating:{" "}
+                                        <span className="text-sm font-bold text-gray-900">
+                                            {myRating} / 5
+                                        </span>
+                                    </p>
+
+                                    <button
+                                        type="button"
+                                        disabled={updating}
+                                        onClick={() => {
+                                            setSelectedRating(myRating);
+                                            setEditingRating(true);
+                                        }}
+                                        className="cursor-pointer text-xs font-semibold text-green-700 hover:underline disabled:cursor-not-allowed disabled:opacity-60"
+                                    >
+                                        Change
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                                        Rate this worker (1-5)
+                                    </p>
+
+                                    <div className="mt-2 grid grid-cols-5 gap-1.5">
+                                        {[1, 2, 3, 4, 5].map((value) => (
+                                            <button
+                                                key={value}
+                                                type="button"
+                                                disabled={updating}
+                                                onClick={() => setSelectedRating(value)}
+                                                aria-pressed={selectedRating === value}
+                                                className={`h-8 rounded-lg border text-sm font-semibold cursor-pointer transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
+                                                    selectedRating === value
+                                                        ? "border-green-700 bg-green-700 text-white"
+                                                        : "border-gray-200 bg-white text-gray-700 hover:border-green-300 hover:bg-green-50"
+                                                }`}
+                                            >
+                                                {value}
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                    <div className="mt-2 flex gap-2">
+                                        <button
+                                            type="button"
+                                            disabled={!selectedRating || updating}
+                                            onClick={submitRating}
+                                            className="flex h-8 flex-1 items-center justify-center rounded-lg bg-green-600 text-xs font-semibold text-white cursor-pointer transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60"
+                                        >
+                                            {updating ? "Saving..." : "Submit rating"}
+                                        </button>
+
+                                        {editingRating && (
+                                            <button
+                                                type="button"
+                                                disabled={updating}
+                                                onClick={() => {
+                                                    setEditingRating(false);
+                                                    setSelectedRating(null);
+                                                }}
+                                                className="h-8 rounded-lg px-3 text-xs font-medium text-gray-500 cursor-pointer hover:bg-gray-100"
+                                            >
+                                                Cancel
+                                            </button>
+                                        )}
+                                    </div>
+                                </>
+                            )}
                         </div>
                     )}
 

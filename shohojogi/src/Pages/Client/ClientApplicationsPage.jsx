@@ -154,6 +154,67 @@ export default function ClientApplicationsPage() {
         }
     };
 
+    // Rate the worker of an accepted application (1-5).
+    // Returns true when saved so the card can close its rating form.
+    const rateWorker = async (applicationId, rating) => {
+        if (!API_URL) {
+            setError("API URL is not configured.");
+            return false;
+        }
+
+        setUpdatingId(applicationId);
+        setError("");
+
+        try {
+            const response = await fetch(
+                `${API_URL}/client/applications/${applicationId}/rating`,
+                {
+                    method: "PATCH",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ rating }),
+                },
+            );
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(data.error || "Unable to save rating.");
+            }
+
+            // Save this application's rating and refresh the worker's
+            // average on every card for the same worker.
+            setApplications((current) =>
+                current.map((application) => {
+                    const updated =
+                        application._id === applicationId
+                            ? { ...application, rating: data.application.rating }
+                            : application;
+
+                    return updated.worker?._id === data.worker._id
+                        ? {
+                            ...updated,
+                            worker: {
+                                ...updated.worker,
+                                rating: data.worker.rating,
+                                ratingCount: data.worker.ratingCount,
+                            },
+                        }
+                        : updated;
+                }),
+            );
+
+            return true;
+        } catch (err) {
+            setError(err.message || "Unable to save rating.");
+            return false;
+        } finally {
+            setUpdatingId(null);
+        }
+    };
+
     const stats = useMemo(() => {
         const total = applications.length;
 
@@ -354,6 +415,9 @@ export default function ClientApplicationsPage() {
                                                 application._id,
                                                 "rejected",
                                             )
+                                        }
+                                        onRate={(rating) =>
+                                            rateWorker(application._id, rating)
                                         }
                                     />
                                 ))}
