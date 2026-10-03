@@ -8,6 +8,8 @@ import {
   LogOut,
   BriefcaseBusiness,
   BadgeCheck,
+  ClipboardList,
+  Send,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +20,6 @@ function Navbar() {
     { name: "Find Work", link: "/find-work" },
     { name: "Hire People", link: "/collections" },
     { name: "Why Shohojogi", link: "/why-shohojogi" },
-
-    { name: "Admin", link: "/admin" },
   ];
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -154,7 +154,7 @@ function Navbar() {
                         {user.name}
                       </p>
                     </div>
-                    {/* Post — workers only */}
+                    {/* Post — clients only */}
                     {user.role === "client" && (
                       <button
                         onClick={() => {
@@ -169,6 +169,20 @@ function Navbar() {
                         <span>Create Listing</span>
                       </button>
                     )}
+                    {user.role === "client" && (
+                      <button
+                      onClick={() => {
+                        setAccountOpen(false);
+                        navigate("/client/applications");
+                      }}
+                      className="flex w-full items-center gap-3 rounded-xl
+                      px-3 py-2.5 text-sm text-gray-700
+                      hover:bg-gray-100 transition"
+                      >
+                        <Send size={18} />
+                        <span>Applications</span>
+                        </button>
+                      )}
 
                     {/* Applications dashboard — workers only */}
                     {user.role === "worker" && (

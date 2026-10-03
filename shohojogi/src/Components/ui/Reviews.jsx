@@ -5,7 +5,7 @@ const reviews = [
     name: "Mohimenul Omi",
     role: "Homeowner",
     review:
-      "I needed a plumber for a leaking kitchen sink and found someone quickly. The whole process was surprisingly simple.",
+      "I needed a plumber for a leaking toilet and found someone quickly. The whole process was surprisingly simple.",
   },
   {
     name: "Sadia Islam",
