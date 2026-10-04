@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../../Components/ui/Navbar";
-import HeroVideo from "../../Components/ui/heroVideo";
 import Hero from "../../Components/ui/Hero";
 import Services from "../../Components/ui/Services";
 import { NoiseBackground } from "../../Components/ui/noise-background";

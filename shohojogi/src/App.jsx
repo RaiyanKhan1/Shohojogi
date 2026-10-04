@@ -1,4 +1,5 @@
 import Navbar from "./Components/ui/Navbar.jsx";
+import CarbonFootprintDisplay from "./Components/ui/CarbonFootprintDisplay.jsx";
 import "./App.css";
 
 import {
@@ -117,6 +118,8 @@ function AppContent() {
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+
+      <CarbonFootprintDisplay />
     </>
   );
 }
